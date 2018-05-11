@@ -1,14 +1,14 @@
-/*
+﻿(*
 * PUBLISHed header for the libmx library.
 *
 * Copyright 1984-2016 The MathWorks, Inc.
 * All Rights Reserved.
-*/
+*)
 
-/*
+(*
  * NOTE: The contents of this header are ultimately PUBLISHED in
  * extern/include/matrix.h.
- */
+ *)
 
 #ifdef MDA_ARRAY_HPP_
 #error Using MATLAB Data API with C Matrix API is not supported.
@@ -28,8 +28,8 @@
 #include <stddef.h>
 #include "tmwtypes.h"
 
-/* we can't see these definitions, which are stored in package.h, so we
-   duplicate them here. */
+(* we can't see these definitions, which are stored in package.h, so we
+   duplicate them here. *)
 #ifdef _MSC_VER
 #define MATRIX_DLL_EXPORT_SYM __declspec(dllexport)
 #define MATRIX_DLL_IMPORT_SYM __declspec(dllimport)
@@ -41,25 +41,25 @@
 #define MATRIX_DLL_IMPORT_SYM
 #endif
 
-/**
+(**
  * Define symbol access for symbols exported from the libmwmatrix dll.
- */
+ *)
 #if defined(BUILDING_PUBLISHED_API_CPP)
 #define LIBMMWMATRIX_PUBLISHED_API MATRIX_DLL_EXPORT_SYM
 #else
 #if defined(export_matrix_h)
-/* we are a C file coming through /src/include/matrix.h */
+(* we are a C file coming through /src/include/matrix.h *)
 #define LIBMMWMATRIX_PUBLISHED_API MATRIX_DLL_IMPORT_SYM
 #else
-/* We are a C mex file coming through /extern/include/matrix.h
+(* We are a C mex file coming through /extern/include/matrix.h
  * LIBMMWMATRIX_PUBLISHED_API is empty to match definitions in mex.h.
- */
+ *)
 #ifdef LIBMMWMATRIX_PUBLISHED_API
 #undef LIBMMWMATRIX_PUBLISHED_API
 #endif
 #define LIBMMWMATRIX_PUBLISHED_API
-#endif /* export_matrix_h */
-#endif /* BUILDING_PUBLISHED_API_CPP */
+#endif (* export_matrix_h *)
+#endif (* BUILDING_PUBLISHED_API_CPP *)
 
 #ifdef __cplusplus
 #define LIBMMWMATRIX_PUBLISHED_API_EXTERN_C extern "C" LIBMMWMATRIX_PUBLISHED_API
@@ -83,7 +83,7 @@
 
 #if defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE)
 
-/* Errors! Legacy knobs cannot be used with release-based hard knobs */
+(* Errors! Legacy knobs cannot be used with release-based hard knobs *)
 
 #if defined(MX_COMPAT_32) && defined(MATLAB_MEXCMD_RELEASE)
 #error "MEX command option -R20XXx is incompatible with MX_COMPAT_32"
@@ -103,15 +103,15 @@
 
 #else
 
-/* Legacy knobs are defined  */
+(* Legacy knobs are defined  *)
 
 #define MATLAB_TARGET_API_VERSION MW_FIRST_API_VERSION
 
 #endif
 
-#else /* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) */
+#else (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
 
-/* No Legacy knobs. Check release-based tag */
+(* No Legacy knobs. Check release-based tag *)
 
 #if defined(MATLAB_MEXCMD_RELEASE)
 #define MW_MEXCMD_VERSION MW_REL2VER(MATLAB_MEXCMD_RELEASE)
@@ -142,7 +142,7 @@
 
 #if defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE)
 
-/* Check whether MEXCMD and MEXSRC release tags are compatible */
+(* Check whether MEXCMD and MEXSRC release tags are compatible *)
 
 #if defined(MATLAB_MEXCMD_RELEASE)
 #define MATLAB_TARGET_API_VERSION MW_MEXCMD_VERSION
@@ -150,20 +150,20 @@
 #define MATLAB_TARGET_API_VERSION MW_MEXSRC_VERSION
 #endif
 
-#else /* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) */
+#else (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
 
 #if defined(MATLAB_DEFAULT_RELEASE)
 #define MATLAB_TARGET_API_VERSION MW_DEFAULT_VERSION
 #else
 
-/* None of the input macros are defined. Use LATEST. */
+(* None of the input macros are defined. Use LATEST. *)
 #define MATLAB_TARGET_API_VERSION MW_LATEST_API_VERSION
 
-#endif /* defined(MATLAB_DEFAULT_RELEASE) */
+#endif (* defined(MATLAB_DEFAULT_RELEASE) *)
 
-#endif /* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) */
+#endif (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
 
-#endif /* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) */
+#endif (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
 
 #if defined(TARGET_API_VERSION)
 #if MATLAB_TARGET_API_VERSION != TARGET_API_VERSION
@@ -173,7 +173,7 @@
 #define TARGET_API_VERSION MATLAB_TARGET_API_VERSION
 #endif
 
-#endif /* __RELEASE_VERSION_DETECTOR__ */
+#endif (* __RELEASE_VERSION_DETECTOR__ *)
 #ifndef __MATRIX__VERSION_DEFS__
 #define __MATRIX__VERSION_DEFS__
 
@@ -192,9 +192,9 @@
 #if !defined(TARGET_API_VERSION) || TARGET_API_VERSION == 700
 #if !defined(BUILDING_PUBLISHED_API_CPP)
 
-/*
+(*
  * PUBLISHED APIs with changes in MATLAB 7.3
- */
+ *)
 
 #if !defined(MX_COMPAT_32)
 
@@ -354,11 +354,11 @@ extern "C" {
 }
 #endif
 
-#else /* MX_COMPAT_32 */
+#else (* MX_COMPAT_32 *)
 
-/*
+(*
  * 32-bit compatibility APIs
- */
+ *)
 
 #ifdef __cplusplus
 extern "C" {
@@ -516,8 +516,8 @@ extern "C" {
 }
 #endif
 
-#endif /* #ifdef MX_COMPAT_32 */
-#endif /* !defined(BUILDING_PUBLISHED_API_CPP) */
+#endif (* #ifdef MX_COMPAT_32 *)
+#endif (* !defined(BUILDING_PUBLISHED_API_CPP) *)
 
 
 #elif TARGET_API_VERSION == 800
@@ -679,43 +679,43 @@ extern "C" {
 #define mxGetPropertyShared mxGetPropertySharedIsDeprecated
 #define mxSetPropertyShared mxSetPropertySharedIsDeprecated
 
-#endif /* TARGET_API_VERSION */
-#endif /* BUILDING_LIBMX */
-#endif /* __MATRIX__VERSION_DEFS__ */
+#endif (* TARGET_API_VERSION *)
+#endif (* BUILDING_LIBMX *)
+#endif (* __MATRIX__VERSION_DEFS__ *)
 #ifndef MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP
 #define MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP
 
 #include <stddef.h>
 #include <tmwtypes.h>
 
-/**
+(**
  * Forward declaration for mxArray
- */
+ *)
 typedef struct mxArray_tag mxArray;
 
-/**
+(**
  * Types representing MEX-file entry points
- */
+ *)
 typedef void (*mxFunctionPtr)(int nlhs, mxArray *plhs[], int nrhs, mxArray *prhs[]);
 
-/**
+(**
  * Maximum mxArray name length
- */
+ *)
 #define mxMAXNAM TMW_NAME_LENGTH_MAX
 
-/**
+(**
  * Logical type
- */
+ *)
 typedef bool mxLogical;
 
-/**
+(**
  * Typedef required for Unicode support in MATLAB
- */
+ *)
 typedef CHAR16_T mxChar;
 
-/**
+(**
  * Enumeration corresponding to all the valid mxArray types.
- */
+ *)
 typedef enum {
     mxUNKNOWN_CLASS = 0,
     mxCELL_CLASS,
@@ -735,24 +735,24 @@ typedef enum {
     mxUINT64_CLASS,
     mxFUNCTION_CLASS,
     mxOPAQUE_CLASS,
-    mxOBJECT_CLASS, /* keep the last real item in the list */
+    mxOBJECT_CLASS, (* keep the last real item in the list *)
 #if defined(_LP64) || defined(_WIN64)
     mxINDEX_CLASS = mxUINT64_CLASS,
 #else
     mxINDEX_CLASS = mxUINT32_CLASS,
 #endif
-    /* TEMPORARY AND NASTY HACK UNTIL mxSPARSE_CLASS IS COMPLETELY ELIMINATED */
-    mxSPARSE_CLASS = mxVOID_CLASS /* OBSOLETE! DO NOT USE */
+    (* TEMPORARY AND NASTY HACK UNTIL mxSPARSE_CLASS IS COMPLETELY ELIMINATED *)
+    mxSPARSE_CLASS = mxVOID_CLASS (* OBSOLETE! DO NOT USE *)
 } mxClassID;
 
-/**
+(**
  * Indicates whether floating-point mxArrays are real or complex.
- */
+ *)
 typedef enum { mxREAL, mxCOMPLEX } mxComplexity;
 
-/*
+(*
  * MATRIX numeric real data types
- */
+ *)
 typedef double mxDouble;
 typedef float mxSingle;
 typedef int8_T mxInt8;
@@ -764,11 +764,11 @@ typedef uint32_T mxUint32;
 typedef int64_T mxInt64;
 typedef uint64_T mxUint64;
 
-#endif /* MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP */
+#endif (* MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP *)
 #if TARGET_API_VERSION >= 800
-/*
+(*
  * MATRIX numeric complex data types
- */
+ *)
 typedef struct { mxDouble real, imag; } mxComplexDouble;
 typedef struct { mxSingle real, imag; } mxComplexSingle;
 typedef struct { mxInt8 real, imag; } mxComplexInt8;
@@ -780,357 +780,357 @@ typedef struct { mxUint32 real, imag; } mxComplexUint32;
 typedef struct { mxInt64 real, imag; } mxComplexInt64;
 typedef struct { mxUint64 real, imag; } mxComplexUint64;
 
-#endif /* TARGET_API_VERSION >= 800 */
+#endif (* TARGET_API_VERSION >= 800 *)
 #if TARGET_API_VERSION >= 800
 
-/*
+(*
  * Complex MATRIX types and real and complex data access
- */
+ *)
 #define MX_DECLARE_DATA_ACCESSORS(Name)                                                              \
     LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mx##Name *mxGet##Name##s(mxArray const *);                   \
     LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxSet##Name##s(mxArray *, mx##Name *);                   \
     LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mx##Complex##Name *mxGet##Complex##Name##s(mxArray const *); \
     LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxSet##Complex##Name##s(mxArray *, mx##Complex##Name *)
 
-MX_DECLARE_DATA_ACCESSORS(Double); /* mxDoubles*, mxComplexDoubles* in mx[SG]etDoubles, mx[SG]etComplexDoubles */
-MX_DECLARE_DATA_ACCESSORS(Single); /* mxSingles*, mxComplexSingles* in mx[SG]etSingles, mx[SG]etComplexSingles */
-MX_DECLARE_DATA_ACCESSORS(Int8);   /* mxInt8s*,   mxComplexInt8s*   in mx[SG]etInt8s,   mx[SG]etComplexInt8s   */
-MX_DECLARE_DATA_ACCESSORS(Uint8);  /* mxUint8s*,  mxComplexUint8s*  in mx[SG]etUint8s,  mx[SG]etComplexUint8s  */
-MX_DECLARE_DATA_ACCESSORS(Int16);  /* mxInt16s*,  mxComplexInt16s*  in mx[SG]etInt16s,  mx[SG]etComplexInt16s  */
-MX_DECLARE_DATA_ACCESSORS(Uint16); /* mxUint16s*, mxComplexUint16s* in mx[SG]etUint16s, mx[SG]etComplexUint16s */
-MX_DECLARE_DATA_ACCESSORS(Int32);  /* mxInt32s*,  mxComplexInt32s*  in mx[SG]etInt32s,  mx[SG]etComplexInt32s  */
-MX_DECLARE_DATA_ACCESSORS(Uint32); /* mxUint32s*, mxComplexUint32s* in mx[SG]etUint32s, mx[SG]etComplexUint32s */
-MX_DECLARE_DATA_ACCESSORS(Int64);  /* mxInt64s*,  mxComplexInt64s*  in mx[SG]etInt64s,  mx[SG]etComplexInt64s  */
-MX_DECLARE_DATA_ACCESSORS(Uint64); /* mxUint64s*, mxComplexUint64s* in mx[SG]etUint64s, mx[SG]etComplexUint64s */
+MX_DECLARE_DATA_ACCESSORS(Double); (* mxDoubles*, mxComplexDoubles* in mx[SG]etDoubles, mx[SG]etComplexDoubles *)
+MX_DECLARE_DATA_ACCESSORS(Single); (* mxSingles*, mxComplexSingles* in mx[SG]etSingles, mx[SG]etComplexSingles *)
+MX_DECLARE_DATA_ACCESSORS(Int8);   (* mxInt8s*,   mxComplexInt8s*   in mx[SG]etInt8s,   mx[SG]etComplexInt8s   *)
+MX_DECLARE_DATA_ACCESSORS(Uint8);  (* mxUint8s*,  mxComplexUint8s*  in mx[SG]etUint8s,  mx[SG]etComplexUint8s  *)
+MX_DECLARE_DATA_ACCESSORS(Int16);  (* mxInt16s*,  mxComplexInt16s*  in mx[SG]etInt16s,  mx[SG]etComplexInt16s  *)
+MX_DECLARE_DATA_ACCESSORS(Uint16); (* mxUint16s*, mxComplexUint16s* in mx[SG]etUint16s, mx[SG]etComplexUint16s *)
+MX_DECLARE_DATA_ACCESSORS(Int32);  (* mxInt32s*,  mxComplexInt32s*  in mx[SG]etInt32s,  mx[SG]etComplexInt32s  *)
+MX_DECLARE_DATA_ACCESSORS(Uint32); (* mxUint32s*, mxComplexUint32s* in mx[SG]etUint32s, mx[SG]etComplexUint32s *)
+MX_DECLARE_DATA_ACCESSORS(Int64);  (* mxInt64s*,  mxComplexInt64s*  in mx[SG]etInt64s,  mx[SG]etComplexInt64s  *)
+MX_DECLARE_DATA_ACCESSORS(Uint64); (* mxUint64s*, mxComplexUint64s* in mx[SG]etUint64s, mx[SG]etComplexUint64s *)
 
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxMakeArrayReal(mxArray *);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxMakeArrayComplex(mxArray *);
 
-#endif /* TARGET_API_VERSION >= 800 */
+#endif (* TARGET_API_VERSION >= 800 *)
 
-/*
+(*
  * allocate memory, notifying registered listener
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxMalloc(size_t n /* number of bytes */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxMalloc(size_t n (* number of bytes *)
                                                    );
 
-/*
+(*
  * allocate cleared memory, notifying registered listener.
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxCalloc(size_t n,   /* number of objects */
-                                                   size_t size /* size of objects */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxCalloc(size_t n,   (* number of objects *)
+                                                   size_t size (* size of objects *)
                                                    );
 
-/*
+(*
  * free memory, notifying registered listener.
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxFree(void *ptr) /* pointer to memory to be freed */;
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxFree(void *ptr) (* pointer to memory to be freed *);
 
-/*
+(*
  * reallocate memory, notifying registered listener.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxRealloc(void *ptr, size_t size);
 
-/*
+(*
  * Get number of dimensions in array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mwSize mxGetNumberOfDimensions(const mxArray *pa);
 
-/*
+(*
  * Get pointer to dimension array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C const mwSize *mxGetDimensions(const mxArray *pa);
 
-/*
+(*
  * Get row dimension
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C size_t mxGetM(const mxArray *pa);
 
-/*
+(*
  * Get row data pointer for sparse numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mwIndex *mxGetIr(const mxArray *pa);
 
-/*
+(*
  * Get column data pointer for sparse numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mwIndex *mxGetJc(const mxArray *pa);
 
-/*
+(*
  * Get maximum nonzero elements for sparse numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mwSize mxGetNzmax(const mxArray *pa);
 
-/*
+(*
  * Set maximum nonzero elements for numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetNzmax(mxArray *pa, mwSize nzmax);
 
-/*
+(*
  * Return pointer to the nth field name
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C const char *mxGetFieldNameByNumber(const mxArray *pa, int n);
 
 
-/*
+(*
  * Return a pointer to the contents of the named field for
  * the ith element (zero based).
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxGetFieldByNumber(const mxArray *pa, mwIndex i, int fieldnum);
 
-/*
+(*
  * Get a pointer to the specified cell element.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxGetCell(const mxArray *pa, mwIndex i);
 
-/*
+(*
  * Return the class (category) of data that the array holds.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxClassID mxGetClassID(const mxArray *pa);
 
-/*
+(*
  * Get pointer to data
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxGetData(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxGetData(const mxArray *pa (* pointer to array *)
                                                     );
 
-/*
+(*
  * Set pointer to data
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetData(mxArray *pa,  /* pointer to array */
-                                                   void *newdata /* pointer to data */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetData(mxArray *pa,  (* pointer to array *)
+                                                   void *newdata (* pointer to data *)
                                                    );
 
-/*
+(*
  * Determine whether the specified array contains numeric (as opposed
  * to cell or struct) data.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsNumeric(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array is a cell array.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsCell(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array's logical flag is on.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsLogical(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array's scalar flag is on.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsScalar(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array contains character data.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsChar(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array is a structure array.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsStruct(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array is an opaque array.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsOpaque(const mxArray *pa);
 
-/*
+(*
  * Returns true if specified array is a function object.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsFunctionHandle(const mxArray *pa);
 
-/*
+(*
  * This function is deprecated and is preserved only for backward compatibility.
  * DO NOT USE if possible.
  * Is array user defined MATLAB v5 object
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsObject(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsObject(const mxArray *pa (* pointer to array *)
                                                     );
 #if !defined(TARGET_API_VERSION) || (TARGET_API_VERSION == 700)
-/*
+(*
  * Get imaginary data pointer for numeric array
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxGetImagData(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxGetImagData(const mxArray *pa (* pointer to array *)
                                                         );
 
-/*
+(*
  * Set imaginary data pointer for numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
-mxSetImagData(mxArray *pa,  /* pointer to array */
-              void *newdata /* imaginary data array pointer */
+mxSetImagData(mxArray *pa,  (* pointer to array *)
+              void *newdata (* imaginary data array pointer *)
               );
 #endif
 
-/*
+(*
  * Determine whether the given array contains complex data.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsComplex(const mxArray *pa);
 
-/*
+(*
  * Determine whether the given array is a sparse (as opposed to full).
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsSparse(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * double-precision floating-point numbers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsDouble(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * single-precision floating-point numbers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsSingle(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * signed 8-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInt8(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * unsigned 8-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsUint8(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * signed 16-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInt16(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * unsigned 16-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsUint16(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * signed 32-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInt32(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * unsigned 32-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsUint32(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * signed 64-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInt64(const mxArray *pa);
 
-/*
+(*
  * Determine whether the specified array represents its data as
  * unsigned 64-bit integers.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsUint64(const mxArray *pa);
 
-/*
+(*
  * Get number of elements in array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C size_t mxGetNumberOfElements(
-    const mxArray *pa /* pointer to array */
+    const mxArray *pa (* pointer to array *)
     );
 
 #if !defined(TARGET_API_VERSION) || (TARGET_API_VERSION == 700)
-/*
+(*
  * Get imaginary data pointer for numeric array
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double *mxGetPi(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double *mxGetPi(const mxArray *pa (* pointer to array *)
                                                     );
 
-/*
+(*
  * Set imaginary data pointer for numeric array
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPi(mxArray *pa, /* pointer to array */
-                                                 double *pi   /* imaginary data array pointer */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPi(mxArray *pa, (* pointer to array *)
+                                                 double *pi   (* imaginary data array pointer *)
                                                  );
 #endif
 
-/*
+(*
  * Get string array data
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxChar *mxGetChars(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxChar *mxGetChars(const mxArray *pa (* pointer to array *)
                                                        );
 
-/*
+(*
  * Get 8 bits of user data stored in the mxArray header.  NOTE: The state
  * of these bits is not guaranteed to be preserved after API function
  * calls.
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxGetUserBits(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxGetUserBits(const mxArray *pa (* pointer to array *)
                                                       );
 
-/*
+(*
  * Set 8 bits of user data stored in the mxArray header. NOTE: The state
  * of these bits is not guaranteed to be preserved after API function
  * calls.
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetUserBits(mxArray *pa, /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetUserBits(mxArray *pa, (* pointer to array *)
                                                        int value);
 
-/*
+(*
  * Get the real component of the specified array's first data element.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double mxGetScalar(const mxArray *pa);
 
-/*
+(*
  * Inform Watcom compilers that scalar double return values
  * will be in the FPU register.
- */
+ *)
 #ifdef __WATCOMC__
 #pragma aux mxGetScalar value[8087];
 #endif
 
-/*
+(*
  * Is the isFromGlobalWorkspace bit set?
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsFromGlobalWS(const mxArray *pa);
 
-/*
+(*
  * Set the isFromGlobalWorkspace bit.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetFromGlobalWS(mxArray *pa, bool global);
 
-/*
+(*
  * Set row dimension
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetM(mxArray *pa, mwSize m);
 
-/*
+(*
  * Get column dimension
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C size_t mxGetN(const mxArray *pa);
 
-/*
+(*
  * Is array empty
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsEmpty(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsEmpty(const mxArray *pa (* pointer to array *)
                                                    );
-/*
+(*
  * Get the index to the named field.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxGetFieldNumber(const mxArray *pa, const char *name);
 
-/*
+(*
  * Set row data pointer for sparse numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetIr(mxArray *pa, mwIndex *newir);
 
-/*
+(*
  * Set column data pointer for sparse numeric array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetJc(mxArray *pa, mwIndex *newjc);
 
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void *mxGetData(const mxArray *pa);
@@ -1139,173 +1139,173 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double *mxGetPr(const mxArray *pa);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPr(mxArray *pa, double *newdata);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C size_t mxGetElementSize(const mxArray *pa);
 
-/*
+(*
  * Return the offset (in number of elements) from the beginning of
  * the array to a given subscript.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mwIndex mxCalcSingleSubscript(const mxArray *pa,
                                                                      mwSize nsubs,
                                                                      const mwIndex *subs);
 
-/*
+(*
  * Get number of structure fields in array
  * Returns 0 if mxArray is non-struct.
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxGetNumberOfFields(const mxArray *pa /* pointer to array */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxGetNumberOfFields(const mxArray *pa (* pointer to array *)
                                                             );
 
-/*
+(*
  * Set an element in a cell array to the specified value.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetCell(mxArray *pa, mwIndex i, mxArray *value);
 
-/*
+(*
  * Set pa[i][fieldnum] = value
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void 
 mxSetFieldByNumber(mxArray *pa, mwIndex i, int fieldnum, mxArray *value);
 
-/*
+(*
  * Return a pointer to the contents of the named field for the ith
  * element (zero based).  Returns NULL on no such field or if the
  * field itself is NULL
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxGetField(const mxArray *pa, mwIndex i, const char *fieldname);
 
-/*
+(*
  * Sets the contents of the named field for the ith element (zero based).
  * The input 'value' is stored in the input array 'pa' - no copy is made.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
 mxSetField(mxArray *pa, mwIndex i, const char *fieldname, mxArray *value);
 
-/*
+(*
  * mxGetProperty returns the value of a property for a given object and index.
  * The property must be public.
  *
  * If the given property name doesn't exist, or isn't public, or the object isn't
  * the right type, then mxGetProperty returns NULL.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxGetProperty(const mxArray *pa, const mwIndex i, const char *propname);
 
-/*
+(*
  * mxSetProperty sets the value of a property for a given object and index.
  * The property must be public.
  *
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
 mxSetProperty(mxArray *pa, mwIndex i, const char *propname, const mxArray *value);
 
-/*
+(*
  * Return the name of an array's class.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C const char *mxGetClassName(const mxArray *pa);
 
-/*
+(*
  * Determine whether an array is a member of the specified class.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsClass(const mxArray *pa, const char *name);
 
-/*
+(*
  * Create a numeric matrix and initialize all its data elements to 0.
  * In standalone mode, out-of-memory will mean a NULL pointer is returned.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateNumericMatrix(mwSize m, mwSize n, mxClassID classid, mxComplexity flag);
 
-/*
+(*
  * Create an uninitialized numeric matrix.
  * The resulting array must be freed with mxDestroyArray.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateUninitNumericMatrix(size_t m, size_t n, mxClassID classid, mxComplexity flag);
 
-/*
+(*
  * Create an uninitialized numeric array.
  * The resulting array must be freed with mxDestroyArray.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateUninitNumericArray(size_t ndim, size_t *dims, mxClassID classid, mxComplexity flag);
 
-/*
+(*
  * Set column dimension
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetN(mxArray *pa, mwSize n);
 
-/*
+(*
  * Set dimension array and number of dimensions.  Returns 0 on success and 1
  * if there was not enough memory available to reallocate the dimensions array.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int
 mxSetDimensions(mxArray *pa, const mwSize *pdims, mwSize ndims);
 
-/*
+(*
  * mxArray destructor
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxDestroyArray(mxArray *pa);
 
-/*
+(*
  * Create a numeric array and initialize all its data elements to 0.
  *
  * As with mxCreateNumericMatrix, in a standalone application,
  * out-of-memory will mean a NULL pointer is returned.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateNumericArray(mwSize ndim, const mwSize *dims, mxClassID classid, mxComplexity flag);
 
-/*
+(*
  * Create an N-Dimensional array to hold string data;
  * initialize all elements to 0.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateCharArray(mwSize ndim, const mwSize *dims);
 
-/*
+(*
  * Create a two-dimensional array to hold double-precision
  * floating-point data; initialize each data element to 0.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateDoubleMatrix(mwSize m, mwSize n, mxComplexity flag);
 
-/*
+(*
  * Get a properly typed pointer to the elements of a logical array.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxLogical *mxGetLogicals(const mxArray *pa);
 
-/*
+(*
  * Create a logical array and initialize its data elements to false.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateLogicalArray(mwSize ndim, const mwSize *dims);
 
-/*
+(*
  * Create a two-dimensional array to hold logical data and
  * initialize each data element to false.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateLogicalMatrix(mwSize m, mwSize n);
 
-/*
+(*
  * Create a logical scalar mxArray having the specified value.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateLogicalScalar(bool value);
 
-/*
+(*
  * Returns true if we have a valid logical scalar mxArray.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsLogicalScalar(const mxArray *pa);
 
-/*
+(*
  * Returns true if the logical scalar value is true.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsLogicalScalarTrue(const mxArray *pa);
 
-/*
+(*
  * Create a double-precision scalar mxArray initialized to the
  * value specified
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateDoubleScalar(double value);
 
-/*
+(*
  * Create a 2-Dimensional sparse array.
  *
  * Z = mxCreateSparse(m,n,nzmax,cmplx_flag);
@@ -1322,155 +1322,155 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateDoubleScalar(double value);
  * by sparse algorithms.  Consequently, m can be "infinite".  The result
  * is a semi-infinite matrix with a finite number of columns and a finite,
  * but unspecified, number of nonzero rows.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateSparse(mwSize m, mwSize n, mwSize nzmax, mxComplexity flag);
 
-/*
+(*
  * Create a 2-D sparse logical array
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateSparseLogicalMatrix(mwSize m, mwSize n, mwSize nzmax);
 
-/*
+(*
  * Copies characters from a MATLAB array to a char array
  * This function will attempt to perform null termination if it is possible.
  * nChars is the number of bytes in the output buffer
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
 mxGetNChars(const mxArray *pa, char *buf, mwSize nChars);
 
-/*
+(*
  * Converts a string array to a C-style string. The C-style string is in the
  * local codepage encoding. If the conversion for the entire Unicode string
  * cannot fit into the supplied character buffer, then the conversion includes
  * the last whole codepoint that will fit into the buffer. The string is thus
  * truncated at the greatest possible whole codepoint and does not split code-
  * points.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int
 mxGetString(const mxArray *pa, char *buf, mwSize buflen);
 
-/*
+(*
  * Create a NULL terminated C string from an mxArray of type mxCHAR_CLASS
  * Supports multibyte character sets.  The resulting string must be freed
  * with mxFree.  Returns NULL on out of memory or non-character arrays.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C char *mxArrayToString(const mxArray *pa);
 
-/*
+(*
  * Create a NULL terminated C string from an mxArray of type mxCHAR_CLASS
  * The C style string is in UTF-8 encoding. The resulting
  * string must be freed with mxFree. Returns NULL on out of memory or
  * non-character arrays.
- */
+ *)
 
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C char *mxArrayToUTF8String(mxArray const *pa);
 
-/**
+(**
  * Create a 1-by-n string array initialized to str. The supplied string is
  * presumed to be in the local codepage encoding. The character data format
  * in the mxArray will be UTF-16.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateStringFromNChars(const char *str, mwSize n);
 
-/*
+(*
  * Create a 1-by-n string array initialized to null terminated string
  * where n is the length of the string.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateString(const char *str);
 
-/*
+(*
  * Create a string array initialized to the strings in str.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateCharMatrixFromStrings(mwSize m, const char **str);
 
-/*
+(*
  * Create a 2-Dimensional cell array, with each cell initialized
  * to NULL.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateCellMatrix(mwSize m, mwSize n);
 
-/*
+(*
  * Create an N-Dimensional cell array, with each cell initialized
  * to NULL.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateCellArray(mwSize ndim, const mwSize *dims);
 
-/*
+(*
  * Create a 2-Dimensional structure array having the specified fields;
  * initialize all values to NULL.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateStructMatrix(mwSize m, mwSize n, int nfields, const char **fieldnames);
 
-/*
+(*
  * Create an N-Dimensional structure array having the specified fields;
  * initialize all values to NULL.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *
 mxCreateStructArray(mwSize ndim, const mwSize *dims, int nfields, const char **fieldnames);
 
-/*
+(*
  * Make a deep copy of an array, return a pointer to the copy.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxDuplicateArray(const mxArray *in);
 
-/*
+(*
  * Set classname of an unvalidated object array.  It is illegal to
  * call this function on a previously validated object array.
  * Return 0 for success, 1 for failure.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxSetClassName(mxArray *pa, const char *classname);
 
-/*
+(*
  * Add a field to a structure array. Returns field number on success or -1
  * if inputs are invalid or an out of memory condition occurs.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxAddField(mxArray *pa, const char *fieldname);
 
-/*
+(*
  * Remove a field from a structure array.  Does nothing if no such field exists.
  * Does not destroy the field itself.
-*/
+*)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxRemoveField(mxArray *pa, int field);
 
-/*
+(*
  * Function for obtaining MATLAB's concept of EPS
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double mxGetEps(void);
 
-/*
+(*
  * Function for obtaining MATLAB's concept of INF (Used in MEX-File callback).
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double mxGetInf(void);
 
-/*
+(*
  * Function for obtaining MATLAB's concept of NaN (Used in MEX-File callback).
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double mxGetNaN(void);
 
-/*
+(*
  * test for finiteness in a machine-independent manner
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsFinite(double x /* value to test */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsFinite(double x (* value to test *)
                                                     );
 
-/*
+(*
  * test for infinity in a machine-independent manner
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInf(double x /* value to test */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsInf(double x (* value to test *)
                                                  );
-/*
+(*
  * test for NaN in a machine-independent manner
- */
-LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsNaN(double x /* value to test */
+ *)
+LIBMMWMATRIX_PUBLISHED_API_EXTERN_C bool mxIsNaN(double x (* value to test *)
                                                  );
 
 #if !defined(TARGET_API_VERSION) || (TARGET_API_VERSION == 700)
-/*
+(*
  * Undocumented.  Removed in later APIs.
- */
+ *)
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateSharedDataCopy(const mxArray *pa);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxCreateUninitDoubleMatrix(int cmplx_flag, size_t m, size_t n);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxFastZeros(int cmplx_flag, int m, int n);
@@ -1479,10 +1479,10 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxUnshareArray(mxArray *pa, int level);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxGetPropertyShared(const mxArray *pa, size_t i, const char *propname);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPropertyShared(mxArray *pa, size_t i, const char *propname, const mxArray *value);
 #endif
-/*
+(*
  * Inform Watcom compilers that scalar double return values
  * will be in the FPU register.
- */
+ *)
 #ifdef __WATCOMC__
 #pragma aux mxGetEps value[8087];
 #pragma aux mxGetInf value[8087];
@@ -1491,7 +1491,7 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPropertyShared(mxArray *pa, size_t
 
 #ifndef mxassert_h
 #define mxassert_h
-/*
+(*
 mxAssert(int expression, char *error_message)
 ---------------------------------------------
 
@@ -1514,7 +1514,7 @@ mxAssert(int expression, char *error_message)
   Note that script MEX will turn off these assertions when building
   optimized MEX-functions, so they should be used for debugging
   purposes only.
-*/
+*)
 
 #ifdef MATLAB_MEX_FILE
 #ifndef NDEBUG
@@ -1536,24 +1536,24 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
 #define mxAssertS(test, message) assert(test)
 #endif
 
-#endif /* mxassert_h */
+#endif (* mxassert_h *)
 
-#endif /* matrix_h */
-#endif /* MATRIX_DEVELOPER_API_HPP */
+#endif (* matrix_h *)
+#endif (* MATRIX_DEVELOPER_API_HPP *)
 #ifndef __MX_API_VER_HPP__
 #define __MX_API_VER_HPP__
 
-/* Current MATRIX published API version */
+(* Current MATRIX published API version *)
 #define MX_CURRENT_API_VER 0x08000000
 
-/* Backward compatible current MATRIX published API version */
+(* Backward compatible current MATRIX published API version *)
 #define MX_API_VER MX_CURRENT_API_VER
 
-/* Backward compatible MATRIX published API versions */
+(* Backward compatible MATRIX published API versions *)
 #define MX_LAST_32BIT_VER 0x07000000
 #define MX_LAST_SEPARATE_COMPLEX_VER 0x07300000
 
-/* Required MEX-file MATRIX published API version */
+(* Required MEX-file MATRIX published API version *)
 #if TARGET_API_VERSION == 700
 #if defined(MX_COMPAT_32)
 #define MX_TARGET_API_VER MX_LAST_32BIT_VER
@@ -1564,7 +1564,7 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
 #define MX_TARGET_API_VER MX_CURRENT_API_VER
 #endif
 
-/*
+(*
  * The following macros enable conditional compilation based on the
  * target published API. The macros can be used in a single source file
  * that is intended to be built against multiple matrix API versions.
@@ -1575,8 +1575,8 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
  * MX_HAS_INTERLEAVED_COMPLEX evaluates to a non-zero value if complex
  * array data is interleaved.
  *
- */
+ *)
 #define MX_HAS_64BIT_ARRAY_DIMS MX_TARGET_API_VER > MX_LAST_32BIT_VER
 #define MX_HAS_INTERLEAVED_COMPLEX MX_TARGET_API_VER > MX_LAST_SEPARATE_COMPLEX_VER
 
-#endif /* __MX_API_VER_HPP__ */
+#endif (* __MX_API_VER_HPP__ *)
