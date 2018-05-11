@@ -1,7 +1,7 @@
-/*
+﻿(*
  * Copyright 1984-2016 The MathWorks, Inc.
  * All Rights Reserved.
- */
+ *)
 
 #if defined(_MSC_VER)
 # pragma once
@@ -15,7 +15,7 @@
 
 #ifndef __TMWTYPES__
 #define __TMWTYPES__
-/*
+(*
  * File    : tmwtypes.h
  * Abstract:
  *      Data types for use with MATLAB/SIMULINK and the Real-Time Workshop.
@@ -24,7 +24,7 @@
  *      via compiler switches.
  *
  *      Define NO_FLOATS to eliminate reference to real_T, etc.
- */
+ *)
 
 #include <limits.h>
 
@@ -38,7 +38,7 @@
 #ifdef NO_FLOATS
 # define double double_not_allowed
 # define float  float_not_allowed
-#endif /*NO_FLOATS*/
+#endif (*NO_FLOATS*)
 
 #ifndef NO_FLOATS
 
@@ -51,11 +51,11 @@
 # endif
 #endif
 
-#endif /*NO_FLOATS*/
+#endif (*NO_FLOATS*)
 
-/*
+(*
  *      The following data types cannot be overridden when building MEX files.
- */
+ *)
 #ifdef MATLAB_MEX_FILE
 # undef CHARACTER_T
 # undef INTEGER_T
@@ -64,10 +64,10 @@
 # undef TIME_T
 #endif
 
-/*
+(*
  * The uchar_T, ushort_T and ulong_T types are needed for compilers which do 
  * not allow defines to be specified, at the command line, with spaces in them.
- */
+ *)
 
 typedef unsigned char       uchar_T;
 typedef unsigned short      ushort_T;
@@ -82,14 +82,14 @@ typedef unsigned long long  ulonglong_T;
 
 
 
-/*=======================================================================*
+(*=======================================================================*
  * Fixed width word size data types:                                     *
  *   int8_T, int16_T, int32_T     - signed 8, 16, or 32 bit integers     *
  *   uint8_T, uint16_T, uint32_T  - unsigned 8, 16, or 32 bit integers   *
  *   real32_T, real64_T           - 32 and 64 bit floating point numbers *
- *=======================================================================*/
+ *=======================================================================*)
 
-/* When used with Real Time Workshop generated code, this
+(* When used with Real Time Workshop generated code, this
  * header file can be used with a variety of compilers.
  *
  * The compiler could be for an 8 bit embedded processor that
@@ -108,11 +108,11 @@ typedef unsigned long long  ulonglong_T;
  * for the target.  There are known cases where a compiler
  * targeting processors with 64 bit longs can't do accurate
  * preprocessor comparisons on more than 32 bits.  
- */
+ *)
 
-/* Determine the number of bits for int, long, short, and char.
+(* Determine the number of bits for int, long, short, and char.
  * If one fails to be determined, set the number of bits to -1
- */
+ *)
 
 #ifndef TMW_BITS_PER_INT
 # if   INT_MAX  == 0x7FL
@@ -170,7 +170,7 @@ typedef unsigned long long  ulonglong_T;
 # endif
 #endif
 
-/* It is common for one or more of the integer types
+(* It is common for one or more of the integer types
  * to be the same size.  For example, on many embedded
  * processors, both shorts and ints are 16 bits.  On
  * processors used for workstations, it is quite common
@@ -186,7 +186,7 @@ typedef unsigned long long  ulonglong_T;
  * are 16 bits.  To reduce these types of
  * complaints, it is best to make int the
  * preferred choice when more than one is available.
- */
+ *)
 
 #ifndef INT8_T
 # if   TMW_BITS_PER_INT   == 8
@@ -282,13 +282,13 @@ typedef unsigned long long  ulonglong_T;
  typedef UINT32_T uint32_T;
 #endif
 
-/* The following is used to emulate smaller integer types when only
+(* The following is used to emulate smaller integer types when only
  * larger types are available.  For example, compilers for TI C3x/C4x DSPs 
  * define char and short to be 32 bits, so 8 and 16 bits are not directly
  * available.  This target is commonly used with RTW rapid prototyping.
  * Other DSPs define char to be 16 bits, so 8 bits is not directly 
  * available.
- */
+ *)
 #ifndef INT8_T
 # ifdef INT16_T
 #  define INT8_T INT16_T
@@ -357,13 +357,13 @@ typedef unsigned long long  ulonglong_T;
  typedef REAL64_T real64_T;
 #endif
 
-#endif /* NO_FLOATS*/
+#endif (* NO_FLOATS*)
 
-/*=======================================================================*
+(*=======================================================================*
  * Fixed width word size data types:                                     *
  *   int64_T                      - signed 64 bit integers               *
  *   uint64_T                     - unsigned 64 bit integers             *
- *=======================================================================*/
+ *=======================================================================*)
 
 
 
@@ -441,9 +441,9 @@ typedef unsigned long long  ulonglong_T;
  typedef UINT64_T uint64_T;
 #endif
 
-/*===========================================================================*
+(*===========================================================================*
  * Format string modifiers for using size_t variables in printf statements.  *
- *===========================================================================*/
+ *===========================================================================*)
 
 #ifndef FMT_SIZE_T
 #  if (defined( __GNUC__ ) || defined(_STDC_C99))&& !defined(__MINGW64__)
@@ -471,7 +471,7 @@ typedef unsigned long long  ulonglong_T;
 #  endif
 #endif
 
-/*===========================================================================*
+(*===========================================================================*
  * General or logical data types where the word size is not guaranteed.      *
  *  real_T     - possible settings include real32_T or real64_T              *
  *  time_T     - possible settings include real32_T or real64_T              *
@@ -480,7 +480,7 @@ typedef unsigned long long  ulonglong_T;
  *  int_T                                                                    *
  *  uint_T                                                                   *
  *  byte_T                                                                   *
- *===========================================================================*/
+ *===========================================================================*)
 
 #ifndef NO_FLOATS
 
@@ -506,7 +506,7 @@ typedef unsigned long long  ulonglong_T;
  typedef TIME_T time_T;
 #endif
 
-#endif /* NO_FLOATS */
+#endif (* NO_FLOATS *)
 
 #ifndef BOOLEAN_T
 # if defined(UINT8_T)
@@ -542,9 +542,9 @@ typedef UINTEGER_T uint_T;
 typedef BYTE_T byte_T;
 
 
-/*===========================================================================*
+(*===========================================================================*
  * Define Complex Structures                                                 *
- *===========================================================================*/
+ *===========================================================================*)
 #ifndef NO_FLOATS
 
 #ifndef CREAL32_T
@@ -574,7 +574,7 @@ typedef BYTE_T byte_T;
 #  endif
 #endif
 
-#endif /* NO_FLOATS */
+#endif (* NO_FLOATS *)
 
 #ifndef CINT8_T
 #  ifdef INT8_T
@@ -648,25 +648,25 @@ typedef BYTE_T byte_T;
 #  endif
 #endif
 
-/*=======================================================================*
+(*=======================================================================*
  * Min and Max:                                                          *
  *   int8_T, int16_T, int32_T     - signed 8, 16, or 32 bit integers     *
  *   uint8_T, uint16_T, uint32_T  - unsigned 8, 16, or 32 bit integers   *
- *=======================================================================*/
+ *=======================================================================*)
 
-#define  MAX_int8_T      ((int8_T)(127))            /* 127  */
-#define  MIN_int8_T      ((int8_T)(-128))           /* -128 */
-#define  MAX_uint8_T     ((uint8_T)(255))           /* 255  */
+#define  MAX_int8_T      ((int8_T)(127))            (* 127  *)
+#define  MIN_int8_T      ((int8_T)(-128))           (* -128 *)
+#define  MAX_uint8_T     ((uint8_T)(255))           (* 255  *)
 #define  MIN_uint8_T     ((uint8_T)(0))
                            
-#define  MAX_int16_T     ((int16_T)(32767))         /* 32767 */
-#define  MIN_int16_T     ((int16_T)(-32768))        /* -32768 */
-#define  MAX_uint16_T    ((uint16_T)(65535))        /* 65535 */
+#define  MAX_int16_T     ((int16_T)(32767))         (* 32767 *)
+#define  MIN_int16_T     ((int16_T)(-32768))        (* -32768 *)
+#define  MAX_uint16_T    ((uint16_T)(65535))        (* 65535 *)
 #define  MIN_uint16_T    ((uint16_T)(0))
                            
-#define  MAX_int32_T     ((int32_T)(2147483647))    /* 2147483647  */
-#define  MIN_int32_T     ((int32_T)(-2147483647-1)) /* -2147483648 */
-#define  MAX_uint32_T    ((uint32_T)(0xFFFFFFFFU))  /* 4294967295  */
+#define  MAX_int32_T     ((int32_T)(2147483647))    (* 2147483647  *)
+#define  MIN_int32_T     ((int32_T)(-2147483647-1)) (* -2147483648 *)
+#define  MAX_uint32_T    ((uint32_T)(0xFFFFFFFFU))  (* 4294967295  *)
 #define  MIN_uint32_T    ((uint32_T)(0))
 
 #if defined(_MSC_VER) || (defined(__BORLANDC__) && __BORLANDC__ >= 0x530) \
@@ -702,20 +702,20 @@ typedef BYTE_T byte_T;
 #endif
 
 #ifdef _MSC_VER
-/* Conversion from unsigned __int64 to double is not implemented in windows
+(* Conversion from unsigned __int64 to double is not implemented in windows
  * and results in a compile error, thus the value must first be cast to
  * signed __int64, and then to double.
  *
  * If the 64 bit int value is greater than 2^63-1, which is the signed int64 max,
  * the macro below provides a workaround for casting a uint64 value to a double
  * in windows.
- */
+ *)
 #  define uint64_to_double(u) ( ((u) > _I64_MAX) ? \
             (double)(__int64)((u) - _I64_MAX - 1) + (double)_I64_MAX + 1: \
             (double)(__int64)(u) )
 
-/* The following inline function should only be used in the macro double_to_uint64,
- * as it only handles the specfic range of double between 2^63 and 2^64-1 */
+(* The following inline function should only be used in the macro double_to_uint64,
+ * as it only handles the specfic range of double between 2^63 and 2^64-1 *)
 __forceinline
 uint64_T double_to_uint64_helper(double d) {
   union double_to_uint64_union_type {
@@ -726,12 +726,12 @@ uint64_T double_to_uint64_helper(double d) {
   return (((di.i64 & 0x000fffffffffffff) | 0x0010000000000000) << 11);
 }
 
-/* The largest double value that can be cast to uint64 in windows is the
+(* The largest double value that can be cast to uint64 in windows is the
  * signed int64 max, which is 2^63-1. The macro below provides
  * a workaround for casting large double values to uint64 in windows.
- */
-/* The magic number 18446744073709551616.0 is 2^64 */
-/* The magic number 9223372036854775808.0 is 2^63 */
+ *)
+(* The magic number 18446744073709551616.0 is 2^64 *)
+(* The magic number 9223372036854775808.0 is 2^63 *)
 #  define double_to_uint64(d) ( ((d) >= 18446744073709551616.0) ? \
             0xffffffffffffffffULL : \
             ((d) >= 0.0) ? \
@@ -742,7 +742,7 @@ uint64_T double_to_uint64_helper(double d) {
 #else
 #  define uint64_to_double(u) ((double)(u))
 #  if defined(__BORLANDC__) || defined(__WATCOMC__) || defined(__TICCSC__)
-/* double_to_uint64 defined only for MSVC and UNIX */
+(* double_to_uint64 defined only for MSVC and UNIX *)
 #  else
 #  define double_to_uint64(d) ( ((d) >= 18446744073709551616.0) ? \
             (unsigned long long) 0xffffffffffffffffULL : \
@@ -764,27 +764,27 @@ typedef boolean_T bool;
 #define true (1)
 #endif
 
-#endif /* _bool_T */
+#endif (* _bool_T *)
 
-#endif /* !__cplusplus */
+#endif (* !__cplusplus *)
 
-/* 
+(*
  * This software assumes that the code is being compiled on a target using a 
  * 2's complement representation for signed integer values.
- */
+ *)
 #if ((SCHAR_MIN + 1) != -SCHAR_MAX)
 #error "This code must be compiled using a 2's complement representation for signed integer values"
 #endif
 
-/*
+(*
  * Maximum length of a MATLAB identifier (function/variable/model)
  * including the null-termination character.
- */
+ *)
 #define TMW_NAME_LENGTH_MAX 64
 
-/*
+(*
  * Maximum values for indices and dimensions
- */
+ *)
 #include <stddef.h>
 
 #ifdef MX_COMPAT_32
@@ -792,13 +792,13 @@ typedef int mwSize;
 typedef int mwIndex;
 typedef int mwSignedIndex;
 #else
-typedef size_t    mwSize;         /* unsigned pointer-width integer */
-typedef size_t    mwIndex;        /* unsigned pointer-width integer */
-typedef ptrdiff_t mwSignedIndex;  /* a signed pointer-width integer */
+typedef size_t    mwSize;         (* unsigned pointer-width integer *)
+typedef size_t    mwIndex;        (* unsigned pointer-width integer *)
+typedef ptrdiff_t mwSignedIndex;  (* a signed pointer-width integer *)
 #endif
 
 #if (defined(_LP64) || defined(_WIN64)) && !defined(MX_COMPAT_32)
-/* Currently 2^48 based on hardware limitations */
+(* Currently 2^48 based on hardware limitations *)
 # define MWSIZE_MAX    281474976710655UL
 # define MWINDEX_MAX   281474976710655UL
 # define MWSINDEX_MAX  281474976710655L
@@ -812,7 +812,7 @@ typedef ptrdiff_t mwSignedIndex;  /* a signed pointer-width integer */
 #define MWSIZE_MIN    0UL
 #define MWINDEX_MIN   0UL
 
-/** UTF-16 character type */
+(** UTF-16 character type *)
 
 #if (defined(__cplusplus) && (__cplusplus >= 201103L)) || (defined(_HAS_CHAR16_T_LANGUAGE_SUPPORT) && _HAS_CHAR16_T_LANGUAGE_SUPPORT)
 typedef char16_t CHAR16_T;
@@ -824,6 +824,6 @@ typedef wchar_t CHAR16_T;
 typedef UINT16_T CHAR16_T;
 #endif
 
-#endif  /* __TMWTYPES__ */
+#endif  (* __TMWTYPES__ *)
 
-#endif /* tmwtypes_h */
+#endif (* tmwtypes_h *)
