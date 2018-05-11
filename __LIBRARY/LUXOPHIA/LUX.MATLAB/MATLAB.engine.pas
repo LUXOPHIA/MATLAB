@@ -41,6 +41,9 @@ uses LUX.Code.C;
 type TEngine = record end;
      PEngine = ^TEngine;
 
+type T_mxArray = record end;
+     P_mxArray = ^T_mxArray;
+
 (* Execute matlab statement *)
 function engEvalString( ep_:PEngine; const string_:P_char ) :T_int;
 
