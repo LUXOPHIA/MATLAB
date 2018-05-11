@@ -1,20 +1,27 @@
-﻿(*
+﻿unit MATLAB.tmwtypes;
+
+(*
  * Copyright 1984-2016 The MathWorks, Inc.
  * All Rights Reserved.
  *)
 
+interface //#################################################################### ■
+
+uses LUX.Code.C,
+     LUX.MATLAB;
+
 #if defined(_MSC_VER)
-# pragma once
-#endif
+//# pragma once
+{$ENDIF}
 #if defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ > 3))
-# pragma once
-#endif
+//# pragma once
+{$ENDIF}
 
-#ifndef tmwtypes_h
-#define tmwtypes_h
+{$IFNDEF tmwtypes_h }
+{$DEFINE tmwtypes_h }
 
-#ifndef __TMWTYPES__
-#define __TMWTYPES__
+{$IFNDEF __TMWTYPES__ }
+{$DEFINE __TMWTYPES__ }
 (*
  * File    : tmwtypes.h
  * Abstract:
@@ -28,41 +35,41 @@
 
 #include <limits.h>
 
-#ifdef __APPLE_CC__
+{$IFDEF __APPLE_CC__ }
 #include <stdbool.h>
-#endif
+{$ENDIF}
 
-#define LOGICAL_IS_A_TYPE
-#define SPARSE_GENERALIZATION
+{$DEFINE LOGICAL_IS_A_TYPE }
+{$DEFINE SPARSE_GENERALIZATION }
 
-#ifdef NO_FLOATS
+{$IFDEF NO_FLOATS }
 # define double double_not_allowed
 # define float  float_not_allowed
-#endif (*NO_FLOATS*)
+{$ENDIF} (*NO_FLOATS*)
 
-#ifndef NO_FLOATS
+{$IFNDEF NO_FLOATS }
 
-#ifndef __MWERKS__
+{$IFNDEF __MWERKS__ }
 # ifdef __STDC__
 #  include <float.h>
-# else
+ {$ELSE}
 #  define FLT_MANT_DIG 24
 #  define DBL_MANT_DIG 53
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#endif (*NO_FLOATS*)
+{$ENDIF} (*NO_FLOATS*)
 
 (*
  *      The following data types cannot be overridden when building MEX files.
  *)
-#ifdef MATLAB_MEX_FILE
-# undef CHARACTER_T
-# undef INTEGER_T
-# undef BOOLEAN_T
-# undef REAL_T
-# undef TIME_T
-#endif
+{$IFDEF MATLAB_MEX_FILE }
+ {$UNDEF CHARACTER_T }
+ {$UNDEF INTEGER_T }
+ {$UNDEF BOOLEAN_T }
+ {$UNDEF REAL_T }
+ {$UNDEF TIME_T }
+{$ENDIF}
 
 (*
  * The uchar_T, ushort_T and ulong_T types are needed for compilers which do 
@@ -78,7 +85,7 @@ typedef unsigned long       ulong_T;
     || defined(__LCC64__)
     
 typedef unsigned long long  ulonglong_T;
-#endif
+{$ENDIF}
 
 
 
@@ -114,61 +121,61 @@ typedef unsigned long long  ulonglong_T;
  * If one fails to be determined, set the number of bits to -1
  *)
 
-#ifndef TMW_BITS_PER_INT
+{$IFNDEF TMW_BITS_PER_INT }
 # if   INT_MAX  == 0x7FL
 #  define TMW_BITS_PER_INT 8
 # elif INT_MAX  == 0x7FFFL
 #  define TMW_BITS_PER_INT 16
 # elif INT_MAX  == 0x7FFFFFFFL
 #  define TMW_BITS_PER_INT 32
-# else
+ {$ELSE}
 #  define TMW_BITS_PER_INT -1
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef TMW_BITS_PER_LONG
+{$IFNDEF TMW_BITS_PER_LONG }
 # if   LONG_MAX  == 0x7FL
 #  define TMW_BITS_PER_LONG 8
 # elif LONG_MAX  == 0x7FFFL
 #  define TMW_BITS_PER_LONG 16
 # elif LONG_MAX  == 0x7FFFFFFFL
 #  define TMW_BITS_PER_LONG 32
-# else
+ {$ELSE}
 #  define TMW_BITS_PER_LONG -1
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef TMW_BITS_PER_SHRT
+{$IFNDEF TMW_BITS_PER_SHRT }
 # if   SHRT_MAX  == 0x7FL
 #  define TMW_BITS_PER_SHRT 8
 # elif SHRT_MAX  == 0x7FFFL
 #  define TMW_BITS_PER_SHRT 16
 # elif SHRT_MAX  == 0x7FFFFFFFL
 #  define TMW_BITS_PER_SHRT 32
-# else
+ {$ELSE}
 #  define TMW_BITS_PER_SHRT -1
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef TMW_BITS_PER_SCHAR
+{$IFNDEF TMW_BITS_PER_SCHAR }
 # if   SCHAR_MAX  == 0x7FL
 #  define TMW_BITS_PER_SCHAR 8
 # elif SCHAR_MAX  == 0x7FFFL
 #  define TMW_BITS_PER_SCHAR 16
 # elif SCHAR_MAX  == 0x7FFFFFFFL
 #  define TMW_BITS_PER_SCHAR 32
-# else
+ {$ELSE}
 #  define TMW_BITS_PER_SCHAR -1
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef TMW_CHAR_SIGNED
+{$IFNDEF TMW_CHAR_SIGNED }
 # if SCHAR_MAX == CHAR_MAX
 #  define TMW_CHAR_SIGNED 1
-# else
+ {$ELSE}
 #  define TMW_CHAR_SIGNED 0
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
 (* It is common for one or more of the integer types
  * to be the same size.  For example, on many embedded
@@ -188,7 +195,7 @@ typedef unsigned long long  ulonglong_T;
  * preferred choice when more than one is available.
  *)
 
-#ifndef INT8_T
+{$IFNDEF INT8_T }
 # if   TMW_BITS_PER_INT   == 8
 #  define  INT8_T int
 # elif TMW_BITS_PER_LONG  == 8
@@ -197,13 +204,13 @@ typedef unsigned long long  ulonglong_T;
 #  define  INT8_T signed char
 # elif TMW_BITS_PER_SHRT  == 8
 #  define  INT8_T short
-# endif
-#endif
-#ifdef INT8_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF INT8_T }
  typedef INT8_T int8_T;
-#endif
+{$ENDIF}
 
-#ifndef UINT8_T
+{$IFNDEF UINT8_T }
 # if   TMW_BITS_PER_INT   == 8
 #  define  UINT8_T unsigned int
 # elif TMW_BITS_PER_LONG  == 8
@@ -212,14 +219,14 @@ typedef unsigned long long  ulonglong_T;
 #  define  UINT8_T unsigned char
 # elif TMW_BITS_PER_SHRT  == 8
 #  define  UINT8_T unsigned short
-# endif
-#endif
-#ifdef UINT8_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF UINT8_T }
  typedef UINT8_T uint8_T;
-#endif
+{$ENDIF}
 
 
-#ifndef INT16_T
+{$IFNDEF INT16_T }
 # if   TMW_BITS_PER_INT   == 16
 #  define  INT16_T int
 # elif TMW_BITS_PER_LONG  == 16
@@ -228,14 +235,14 @@ typedef unsigned long long  ulonglong_T;
 #  define  INT16_T signed char
 # elif TMW_BITS_PER_SHRT  == 16
 #  define  INT16_T short
-# endif
-#endif
-#ifdef INT16_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF INT16_T }
  typedef INT16_T int16_T;
-#endif
+{$ENDIF}
 
 
-#ifndef UINT16_T
+{$IFNDEF UINT16_T }
 # if   TMW_BITS_PER_INT   == 16
 #  define  UINT16_T unsigned int
 # elif TMW_BITS_PER_LONG  == 16
@@ -244,14 +251,14 @@ typedef unsigned long long  ulonglong_T;
 #  define  UINT16_T unsigned char
 # elif TMW_BITS_PER_SHRT  == 16
 #  define  UINT16_T unsigned short
-# endif
-#endif
-#ifdef UINT16_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF UINT16_T }
  typedef UINT16_T uint16_T;
-#endif
+{$ENDIF}
 
 
-#ifndef INT32_T
+{$IFNDEF INT32_T }
 # if   TMW_BITS_PER_INT   == 32
 #  define  INT32_T int
 # elif TMW_BITS_PER_LONG  == 32
@@ -260,14 +267,14 @@ typedef unsigned long long  ulonglong_T;
 #  define  INT32_T signed char
 # elif TMW_BITS_PER_SHRT  == 32
 #  define  INT32_T short
-# endif
-#endif
-#ifdef INT32_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF INT32_T }
  typedef INT32_T int32_T;
-#endif
+{$ENDIF}
 
 
-#ifndef UINT32_T
+{$IFNDEF UINT32_T }
 # if   TMW_BITS_PER_INT   == 32
 #  define  UINT32_T unsigned int
 # elif TMW_BITS_PER_LONG  == 32
@@ -276,11 +283,11 @@ typedef unsigned long long  ulonglong_T;
 #   define UINT32_T unsigned char
 # elif TMW_BITS_PER_SHRT  == 32
 #  define  UINT32_T unsigned short
-# endif
-#endif
-#ifdef UINT32_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF UINT32_T }
  typedef UINT32_T uint32_T;
-#endif
+{$ENDIF}
 
 (* The following is used to emulate smaller integer types when only
  * larger types are available.  For example, compilers for TI C3x/C4x DSPs 
@@ -289,75 +296,75 @@ typedef unsigned long long  ulonglong_T;
  * Other DSPs define char to be 16 bits, so 8 bits is not directly 
  * available.
  *)
-#ifndef INT8_T
+{$IFNDEF INT8_T }
 # ifdef INT16_T
 #  define INT8_T INT16_T
    typedef INT8_T int8_T;
-# else
+ {$ELSE}
 #  ifdef INT32_T
 #   define INT8_T INT32_T
     typedef INT8_T int8_T;
-#  endif
-# endif
-#endif
+  {$ENDIF}
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef UINT8_T
+{$IFNDEF UINT8_T }
 # ifdef UINT16_T
 #   define UINT8_T UINT16_T
     typedef UINT8_T uint8_T;
-# else
+ {$ELSE}
 #  ifdef UINT32_T
 #   define UINT8_T UINT32_T
     typedef UINT8_T uint8_T;
-#  endif
-# endif
-#endif
+  {$ENDIF}
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef INT16_T
+{$IFNDEF INT16_T }
 # ifdef INT32_T
 #   define INT16_T INT32_T
     typedef INT16_T int16_T;
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
-#ifndef UINT16_T
+{$IFNDEF UINT16_T }
 # ifdef UINT32_T
 #   define UINT16_T UINT32_T
     typedef UINT16_T uint16_T;
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
 
-#ifndef NO_FLOATS
+{$IFNDEF NO_FLOATS }
 
-#ifndef REAL32_T
+{$IFNDEF REAL32_T }
 # ifndef __MWERKS__
 #  if FLT_MANT_DIG >= 23
 #   define REAL32_T float
-#  endif
-# else
+  {$ENDIF}
+ {$ELSE}
 #  define REAL32_T float
-# endif
-#endif
-#ifdef REAL32_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF REAL32_T }
  typedef REAL32_T real32_T;
-#endif
+{$ENDIF}
 
 
-#ifndef REAL64_T
+{$IFNDEF REAL64_T }
 # ifndef __MWERKS__
 #  if DBL_MANT_DIG >= 52
 #   define REAL64_T double
-#  endif
-# else
+  {$ENDIF}
+ {$ELSE}
 #  define REAL64_T double
-# endif
-#endif
-#ifdef REAL64_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF REAL64_T }
  typedef REAL64_T real64_T;
-#endif
+{$ENDIF}
 
-#endif (* NO_FLOATS*)
+{$ENDIF} (* NO_FLOATS*)
 
 (*=======================================================================*
  * Fixed width word size data types:                                     *
@@ -367,19 +374,19 @@ typedef unsigned long long  ulonglong_T;
 
 
 
-#ifndef INT64_T
+{$IFNDEF INT64_T }
 # if defined(__APPLE__)
 #  define INT64_T long long
 #  define FMT64 "ll"
 #  if defined(__LP64__) && !defined(INT_TYPE_64_IS_LONG)
-#    define INT_TYPE_64_IS_LONG
-#  endif
+    {$DEFINE INT_TYPE_64_IS_LONG }
+  {$ENDIF}
 # elif (defined(__x86_64__) || defined(__LP64__))&& !defined(__MINGW64__)
 #  define INT64_T long
 #  define FMT64 "l"
 #  if !defined(INT_TYPE_64_IS_LONG)
-#    define INT_TYPE_64_IS_LONG
-#  endif
+    {$DEFINE INT_TYPE_64_IS_LONG }
+  {$ENDIF}
 # elif defined(_MSC_VER) || (defined(__BORLANDC__) && __BORLANDC__ >= 0x530) \
                          || (defined(__WATCOMC__)  && __WATCOMC__  >= 1100)
 #  define INT64_T __int64
@@ -388,8 +395,8 @@ typedef unsigned long long  ulonglong_T;
                          || defined(__LCC64__)
 #  define INT64_T long long
 #  define FMT64 "ll"
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
 
 
@@ -397,25 +404,25 @@ typedef unsigned long long  ulonglong_T;
 # if defined(__GNUC__) && \
     ((__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >=9)))
   __extension__
-# endif
+ {$ENDIF}
  typedef INT64_T int64_T;
-#endif
+{$ENDIF}
 
 
 
-#ifndef UINT64_T
+{$IFNDEF UINT64_T }
 # if defined(__APPLE__)
 #  define UINT64_T unsigned long long
 #  define FMT64 "ll"
 #  if defined(__LP64__) && !defined(INT_TYPE_64_IS_LONG)
-#    define INT_TYPE_64_IS_LONG
-#  endif
+    {$DEFINE INT_TYPE_64_IS_LONG }
+  {$ENDIF}
 # elif (defined(__x86_64__) || defined(__LP64__))&& !defined(__MINGW64__)
 #  define UINT64_T unsigned long
 #  define FMT64 "l"
 #  if !defined(INT_TYPE_64_IS_LONG)
-#    define INT_TYPE_64_IS_LONG
-#  endif
+    {$DEFINE INT_TYPE_64_IS_LONG }
+  {$ENDIF}
 # elif defined(_MSC_VER) || (defined(__BORLANDC__) && __BORLANDC__ >= 0x530) \
                          || (defined(__WATCOMC__)  && __WATCOMC__  >= 1100)
 #  define UINT64_T unsigned __int64
@@ -424,40 +431,40 @@ typedef unsigned long long  ulonglong_T;
                          || defined(__LCC64__)
 #  define UINT64_T unsigned long long
 #  define FMT64 "ll"
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 
 #if defined(_WIN64) || (defined(__APPLE__) && defined(__LP64__)) \
                     || defined(__x86_64__) \
                     || defined(__LP64__)
-#  define INT_TYPE_64_IS_SUPPORTED
-#endif
+  {$DEFINE INT_TYPE_64_IS_SUPPORTED }
+{$ENDIF}
 
 #if defined(UINT64_T)
 # if defined(__GNUC__) && \
     ((__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >=9)))
   __extension__
-# endif
+ {$ENDIF}
  typedef UINT64_T uint64_T;
-#endif
+{$ENDIF}
 
 (*===========================================================================*
  * Format string modifiers for using size_t variables in printf statements.  *
  *===========================================================================*)
 
-#ifndef FMT_SIZE_T
+{$IFNDEF FMT_SIZE_T }
 #  if (defined( __GNUC__ ) || defined(_STDC_C99))&& !defined(__MINGW64__)
 #    define FMT_SIZE_T "z"
 #  elif defined (__WATCOMC__)
 #    define FMT_SIZE_T "l"
 #  elif defined (_WIN32 )
 #    define FMT_SIZE_T "I"
-#  else
+  {$ELSE}
 #    define FMT_SIZE_T "l"
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef FMT_PTRDIFF_T
+{$IFNDEF FMT_PTRDIFF_T }
 #  if defined(__APPLE__)
 #    define FMT_PTRDIFF_T "l"
 #  elif defined( __GNUC__ ) || defined(_STDC_C99)
@@ -466,10 +473,10 @@ typedef unsigned long long  ulonglong_T;
 #    define FMT_PTRDIFF_T "l"
 #  elif defined (_WIN32 )
 #    define FMT_PTRDIFF_T "I"
-#  else
+  {$ELSE}
 #    define FMT_PTRDIFF_T "l"
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
 (*===========================================================================*
  * General or logical data types where the word size is not guaranteed.      *
@@ -482,171 +489,171 @@ typedef unsigned long long  ulonglong_T;
  *  byte_T                                                                   *
  *===========================================================================*)
 
-#ifndef NO_FLOATS
+{$IFNDEF NO_FLOATS }
 
-#ifndef REAL_T
+{$IFNDEF REAL_T }
 # ifdef REAL64_T
 #  define REAL_T real64_T
-# else
+ {$ELSE}
 #  ifdef REAL32_T
 #   define REAL_T real32_T
-#  endif
-# endif
-#endif
-#ifdef REAL_T
+  {$ENDIF}
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF REAL_T }
  typedef REAL_T real_T;
-#endif
+{$ENDIF}
 
-#ifndef TIME_T
+{$IFNDEF TIME_T }
 # ifdef REAL_T
 #  define TIME_T real_T
-# endif
-#endif
-#ifdef TIME_T
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF TIME_T }
  typedef TIME_T time_T;
-#endif
+{$ENDIF}
 
-#endif (* NO_FLOATS *)
+{$ENDIF} (* NO_FLOATS *)
 
-#ifndef BOOLEAN_T
+{$IFNDEF BOOLEAN_T }
 # if defined(UINT8_T)
 #  define BOOLEAN_T UINT8_T
-# else
+ {$ELSE}
 #  define BOOLEAN_T unsigned int
-# endif
-#endif
+ {$ENDIF}
+{$ENDIF}
 typedef BOOLEAN_T boolean_T;
 
 
-#ifndef CHARACTER_T
+{$IFNDEF CHARACTER_T }
 # define CHARACTER_T char
-#endif
+{$ENDIF}
 typedef CHARACTER_T char_T;
 
 
-#ifndef INTEGER_T
+{$IFNDEF INTEGER_T }
 # define INTEGER_T int
-#endif
+{$ENDIF}
 typedef INTEGER_T int_T;
 
 
-#ifndef UINTEGER_T
+{$IFNDEF UINTEGER_T }
 # define UINTEGER_T unsigned
-#endif
+{$ENDIF}
 typedef UINTEGER_T uint_T;
 
 
-#ifndef BYTE_T
+{$IFNDEF BYTE_T }
 # define BYTE_T unsigned char
-#endif
+{$ENDIF}
 typedef BYTE_T byte_T;
 
 
 (*===========================================================================*
  * Define Complex Structures                                                 *
  *===========================================================================*)
-#ifndef NO_FLOATS
+{$IFNDEF NO_FLOATS }
 
-#ifndef CREAL32_T
+{$IFNDEF CREAL32_T }
 #  ifdef REAL32_T
     typedef struct {
       real32_T re, im;
     } creal32_T;
 #    define CREAL32_T creal32_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CREAL64_T
+{$IFNDEF CREAL64_T }
 #  ifdef REAL64_T
     typedef struct {
       real64_T re, im;
     } creal64_T;
 #    define CREAL64_T creal64_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CREAL_T
+{$IFNDEF CREAL_T }
 #  ifdef REAL_T
     typedef struct {
       real_T re, im;
     } creal_T;
 #    define CREAL_T creal_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#endif (* NO_FLOATS *)
+{$ENDIF} (* NO_FLOATS *)
 
-#ifndef CINT8_T
+{$IFNDEF CINT8_T }
 #  ifdef INT8_T
     typedef struct {
       int8_T re, im;
     } cint8_T;
 #    define CINT8_T cint8_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CUINT8_T
+{$IFNDEF CUINT8_T }
 #  ifdef UINT8_T
     typedef struct {
       uint8_T re, im;
     } cuint8_T;
 #    define CUINT8_T cuint8_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CINT16_T
+{$IFNDEF CINT16_T }
 #  ifdef INT16_T
     typedef struct {
       int16_T re, im;
     } cint16_T;
 #    define CINT16_T cint16_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CUINT16_T
+{$IFNDEF CUINT16_T }
 #  ifdef UINT16_T
     typedef struct {
       uint16_T re, im;
     } cuint16_T;
 #    define CUINT16_T cuint16_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CINT32_T
+{$IFNDEF CINT32_T }
 #  ifdef INT32_T
     typedef struct {
       int32_T re, im;
     } cint32_T;
 #    define CINT32_T cint32_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CUINT32_T
+{$IFNDEF CUINT32_T }
 #  ifdef UINT32_T
     typedef struct {
       uint32_T re, im;
     } cuint32_T;
 #    define CUINT32_T cuint32_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CINT64_T
+{$IFNDEF CINT64_T }
 #  ifdef INT64_T
     typedef struct {
       int64_T re, im;
     } cint64_T;
 #    define CINT64_T cint64_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
-#ifndef CUINT64_T
+{$IFNDEF CUINT64_T }
 #  ifdef UINT64_T
     typedef struct {
       uint64_T re, im;
     } cuint64_T;
 #    define CUINT64_T cuint64_T
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
 (*=======================================================================*
  * Min and Max:                                                          *
@@ -675,33 +682,33 @@ typedef BYTE_T byte_T;
 #  ifdef INT64_T
 #    define  MAX_int64_T     ((int64_T)(9223372036854775807LL))
 #    define  MIN_int64_T     ((int64_T)(-9223372036854775807LL-1LL))
-#  endif
+  {$ENDIF}
 #  ifdef UINT64_T
 #    define  MAX_uint64_T    ((uint64_T)(0xFFFFFFFFFFFFFFFFULL))
 #    define  MIN_uint64_T    ((uint64_T)(0))
-#  endif
-#else
+  {$ENDIF}
+{$ELSE}
 #  ifdef INT64_T
 #    ifdef INT_TYPE_64_IS_LONG
 #      define  MAX_int64_T     ((int64_T)(9223372036854775807L))
 #      define  MIN_int64_T     ((int64_T)(-9223372036854775807L-1L))
-#    else
+    {$ELSE}
 #      define  MAX_int64_T     ((int64_T)(9223372036854775807LL))
 #      define  MIN_int64_T     ((int64_T)(-9223372036854775807LL-1LL))
-#    endif
-#  endif
+    {$ENDIF}
+  {$ENDIF}
 #  ifdef UINT64_T
 #    ifdef INT_TYPE_64_IS_LONG
 #      define  MAX_uint64_T    ((uint64_T)(0xFFFFFFFFFFFFFFFFUL))
 #      define  MIN_uint64_T    ((uint64_T)(0))
-#    else
+    {$ELSE}
 #      define  MAX_uint64_T    ((uint64_T)(0xFFFFFFFFFFFFFFFFULL))
 #      define  MIN_uint64_T    ((uint64_T)(0))
-#    endif
-#  endif
-#endif
+    {$ENDIF}
+  {$ENDIF}
+{$ENDIF}
 
-#ifdef _MSC_VER
+{$IFDEF _MSC_VER }
 (* Conversion from unsigned __int64 to double is not implemented in windows
  * and results in a compile error, thus the value must first be cast to
  * signed __int64, and then to double.
@@ -739,34 +746,34 @@ uint64_T double_to_uint64_helper(double d) {
             double_to_uint64_helper(d) : \
             (unsigned __int64)(d) : \
             0ULL )
-#else
+{$ELSE}
 #  define uint64_to_double(u) ((double)(u))
 #  if defined(__BORLANDC__) || defined(__WATCOMC__) || defined(__TICCSC__)
 (* double_to_uint64 defined only for MSVC and UNIX *)
-#  else
+  {$ELSE}
 #  define double_to_uint64(d) ( ((d) >= 18446744073709551616.0) ? \
             (unsigned long long) 0xffffffffffffffffULL : \
             ((d) >= 0) ? (unsigned long long)(d) : (unsigned long long) 0 )
-#  endif
-#endif
+  {$ENDIF}
+{$ENDIF}
 
 #if !defined(__cplusplus) && !defined(__bool_true_false_are_defined)
 
-#ifndef _bool_T
-#define _bool_T
+{$IFNDEF _bool_T }
+{$DEFINE _bool_T }
 
 typedef boolean_T bool;
 
-#ifndef false
+{$IFNDEF false }
 #define false (0)
-#endif
+{$ENDIF}
 #ifndef true 
 #define true (1)
-#endif
+{$ENDIF}
 
-#endif (* _bool_T *)
+{$ENDIF} (* _bool_T *)
 
-#endif (* !__cplusplus *)
+{$ENDIF} (* !__cplusplus *)
 
 (*
  * This software assumes that the code is being compiled on a target using a 
@@ -774,7 +781,7 @@ typedef boolean_T bool;
  *)
 #if ((SCHAR_MIN + 1) != -SCHAR_MAX)
 #error "This code must be compiled using a 2's complement representation for signed integer values"
-#endif
+{$ENDIF}
 
 (*
  * Maximum length of a MATLAB identifier (function/variable/model)
@@ -787,15 +794,15 @@ typedef boolean_T bool;
  *)
 #include <stddef.h>
 
-#ifdef MX_COMPAT_32
+{$IFDEF MX_COMPAT_32 }
 typedef int mwSize;
 typedef int mwIndex;
 typedef int mwSignedIndex;
-#else
+{$ELSE}
 typedef size_t    mwSize;         (* unsigned pointer-width integer *)
 typedef size_t    mwIndex;        (* unsigned pointer-width integer *)
 typedef ptrdiff_t mwSignedIndex;  (* a signed pointer-width integer *)
-#endif
+{$ENDIF}
 
 #if (defined(_LP64) || defined(_WIN64)) && !defined(MX_COMPAT_32)
 (* Currently 2^48 based on hardware limitations *)
@@ -803,12 +810,12 @@ typedef ptrdiff_t mwSignedIndex;  (* a signed pointer-width integer *)
 # define MWINDEX_MAX   281474976710655UL
 # define MWSINDEX_MAX  281474976710655L
 # define MWSINDEX_MIN -281474976710655L
-#else
+{$ELSE}
 # define MWSIZE_MAX    2147483647UL
 # define MWINDEX_MAX   2147483647UL
 # define MWSINDEX_MAX  2147483647L
 # define MWSINDEX_MIN -2147483647L
-#endif
+{$ENDIF}
 #define MWSIZE_MIN    0UL
 #define MWINDEX_MIN   0UL
 
@@ -820,10 +827,12 @@ typedef char16_t CHAR16_T;
 #elif defined(_MSC_VER)
 typedef wchar_t CHAR16_T;
 #define U16_STRING_LITERAL_PREFIX L
-#else
+{$ELSE}
 typedef UINT16_T CHAR16_T;
-#endif
+{$ENDIF}
 
-#endif  (* __TMWTYPES__ *)
+{$ENDIF}  (* __TMWTYPES__ *)
 
-#endif (* tmwtypes_h *)
+implementation //############################################################### ■
+
+end. //######################################################################### ■

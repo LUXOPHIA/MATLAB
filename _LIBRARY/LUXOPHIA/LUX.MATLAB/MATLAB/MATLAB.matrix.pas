@@ -15,10 +15,10 @@
 {$ENDIF}
 
 #if defined(_MSC_VER)
-#pragma once
+//#pragma once
 {$ENDIF}
 #if defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
+//#pragma once
 {$ENDIF}
 
 {$IFNDEF MATRIX_DEVELOPER_API_HPP }
@@ -55,7 +55,7 @@
  * LIBMMWMATRIX_PUBLISHED_API is empty to match definitions in mex.h.
  *)
 {$IFDEF LIBMMWMATRIX_PUBLISHED_API }
-#undef LIBMMWMATRIX_PUBLISHED_API
+{$UNDEF LIBMMWMATRIX_PUBLISHED_API }
 {$ENDIF}
 #define LIBMMWMATRIX_PUBLISHED_API
 {$ENDIF} (* export_matrix_h *)
