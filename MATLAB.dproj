@@ -6,7 +6,7 @@
         <MainSource>MATLAB.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1119</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -319,9 +319,10 @@
             <Form>Form1</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="__LIBRARY\LUXOPHIA\LUX.MATLAB\MATLAB.engine.pas"/>
-        <DCCReference Include="..\..\_LIBRARY\・LUX.Code\LUX.Code.C.pas"/>
-        <DCCReference Include="__LIBRARY\LUXOPHIA\LUX.MATLAB\MATLAB.matrix.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Code\LUX.Code.C.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX\LUX.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.MATLAB\LUX.MATLAB.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.MATLAB\MATLAB\MATLAB.engine.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -355,8 +356,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
-                    <Platform Name="iOSSimulator">
+                <DeployFile LocalName="Win64\Debug\MATLAB.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>MATLAB.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -365,8 +367,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\MATLAB.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>MATLAB.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
