@@ -10,19 +10,19 @@
  * extern/include/matrix.h.
  *)
 
-#ifdef MDA_ARRAY_HPP_
+{$IFDEF MDA_ARRAY_HPP_ }
 #error Using MATLAB Data API with C Matrix API is not supported.
-#endif
+{$ENDIF}
 
 #if defined(_MSC_VER)
 #pragma once
-#endif
+{$ENDIF}
 #if defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ > 3))
 #pragma once
-#endif
+{$ENDIF}
 
-#ifndef MATRIX_DEVELOPER_API_HPP
-#ifndef matrix_h
+{$IFNDEF MATRIX_DEVELOPER_API_HPP }
+{$IFNDEF matrix_h }
 #define matrix_h
 #include <stdlib.h>
 #include <stddef.h>
@@ -30,45 +30,45 @@
 
 (* we can't see these definitions, which are stored in package.h, so we
    duplicate them here. *)
-#ifdef _MSC_VER
+{$IFDEF _MSC_VER }
 #define MATRIX_DLL_EXPORT_SYM __declspec(dllexport)
 #define MATRIX_DLL_IMPORT_SYM __declspec(dllimport)
 #elif __GNUC__ >= 4
 #define MATRIX_DLL_EXPORT_SYM __attribute__((visibility("default")))
 #define MATRIX_DLL_IMPORT_SYM __attribute__((visibility("default")))
-#else
+{$ELSE}
 #define MATRIX_DLL_EXPORT_SYM
 #define MATRIX_DLL_IMPORT_SYM
-#endif
+{$ENDIF}
 
 (**
  * Define symbol access for symbols exported from the libmwmatrix dll.
  *)
 #if defined(BUILDING_PUBLISHED_API_CPP)
 #define LIBMMWMATRIX_PUBLISHED_API MATRIX_DLL_EXPORT_SYM
-#else
+{$ELSE}
 #if defined(export_matrix_h)
 (* we are a C file coming through /src/include/matrix.h *)
 #define LIBMMWMATRIX_PUBLISHED_API MATRIX_DLL_IMPORT_SYM
-#else
+{$ELSE}
 (* We are a C mex file coming through /extern/include/matrix.h
  * LIBMMWMATRIX_PUBLISHED_API is empty to match definitions in mex.h.
  *)
-#ifdef LIBMMWMATRIX_PUBLISHED_API
+{$IFDEF LIBMMWMATRIX_PUBLISHED_API }
 #undef LIBMMWMATRIX_PUBLISHED_API
-#endif
+{$ENDIF}
 #define LIBMMWMATRIX_PUBLISHED_API
-#endif (* export_matrix_h *)
-#endif (* BUILDING_PUBLISHED_API_CPP *)
+{$ENDIF} (* export_matrix_h *)
+{$ENDIF} (* BUILDING_PUBLISHED_API_CPP *)
 
-#ifdef __cplusplus
+{$IFDEF __cplusplus }
 #define LIBMMWMATRIX_PUBLISHED_API_EXTERN_C extern "C" LIBMMWMATRIX_PUBLISHED_API
-#else
+{$ELSE}
 #define LIBMMWMATRIX_PUBLISHED_API_EXTERN_C extern LIBMMWMATRIX_PUBLISHED_API
-#endif
+{$ENDIF}
 
 
-#ifndef __RELEASE_VERSION_DETECTOR__
+{$IFNDEF __RELEASE_VERSION_DETECTOR__ }
 #define __RELEASE_VERSION_DETECTOR__
 
 #define MW_FIRST_API_VERSION 700
@@ -87,29 +87,29 @@
 
 #if defined(MX_COMPAT_32) && defined(MATLAB_MEXCMD_RELEASE)
 #error "MEX command option -R20XXx is incompatible with MX_COMPAT_32"
-#endif
+{$ENDIF}
 
 #if defined(MEX_DOUBLE_HANDLE) && defined(MATLAB_MEXCMD_RELEASE)
 #error "MEX command option -R20XXx is incompatible with MEX_DOUBLE_HANDLE"
-#endif
+{$ENDIF}
 
 #if defined(MX_COMPAT_32) && defined(MATLAB_MEXSRC_RELEASE)
 #error "Source code macro MATLAB_MEXSRC_RELEASE is incompatible with MX_COMPAT_32"
-#endif
+{$ENDIF}
 
 #if defined(MEX_DOUBLE_HANDLE) && defined(MATLAB_MEXSRC_RELEASE)
 #error "Source code macro MATLAB_MEXSRC_RELEASE is incompatible with MEX_DOUBLE_HANDLE"
-#endif
+{$ENDIF}
 
-#else
+{$ELSE}
 
 (* Legacy knobs are defined  *)
 
 #define MATLAB_TARGET_API_VERSION MW_FIRST_API_VERSION
 
-#endif
+{$ENDIF}
 
-#else (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
+{$ELSE} (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
 
 (* No Legacy knobs. Check release-based tag *)
 
@@ -117,28 +117,28 @@
 #define MW_MEXCMD_VERSION MW_REL2VER(MATLAB_MEXCMD_RELEASE)
 #if MW_MEXCMD_VERSION < MW_FIRST_API_VERSION
 #error invalid MATLAB_MEXCMD_RELEASE definition
-#endif
-#endif
+{$ENDIF}
+{$ENDIF}
 
 #if defined(MATLAB_MEXSRC_RELEASE)
 #define MW_MEXSRC_VERSION MW_REL2VER(MATLAB_MEXSRC_RELEASE)
 #if MW_MEXSRC_VERSION < MW_FIRST_API_VERSION
 #error invalid MATLAB_MEXSRC_RELEASE definition
-#endif
-#endif
+{$ENDIF}
+{$ENDIF}
       
 #if defined(MATLAB_DEFAULT_RELEASE)
 #define MW_DEFAULT_VERSION MW_REL2VER(MATLAB_DEFAULT_RELEASE)
 #if MW_DEFAULT_VERSION < MW_FIRST_API_VERSION
 #error invalid MATLAB_DEFAULT_RELEASE definition
-#endif
-#endif
+{$ENDIF}
+{$ENDIF}
 
 #if defined(MATLAB_MEXCMD_RELEASE) && defined(MATLAB_MEXSRC_RELEASE)
 #if MW_MEXCMD_VERSION != MW_MEXSRC_VERSION
 #error "MEX command option -R20XXx is incompatible with MATLAB_MEXSRC_RELEASE"
-#endif
-#endif
+{$ENDIF}
+{$ENDIF}
 
 #if defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE)
 
@@ -146,35 +146,35 @@
 
 #if defined(MATLAB_MEXCMD_RELEASE)
 #define MATLAB_TARGET_API_VERSION MW_MEXCMD_VERSION
-#else
+{$ELSE}
 #define MATLAB_TARGET_API_VERSION MW_MEXSRC_VERSION
-#endif
+{$ENDIF}
 
-#else (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
+{$ELSE} (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
 
 #if defined(MATLAB_DEFAULT_RELEASE)
 #define MATLAB_TARGET_API_VERSION MW_DEFAULT_VERSION
-#else
+{$ELSE}
 
 (* None of the input macros are defined. Use LATEST. *)
 #define MATLAB_TARGET_API_VERSION MW_LATEST_API_VERSION
 
-#endif (* defined(MATLAB_DEFAULT_RELEASE) *)
+{$ENDIF} (* defined(MATLAB_DEFAULT_RELEASE) *)
 
-#endif (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
+{$ENDIF} (* defined(MATLAB_MEXCMD_RELEASE) || defined(MATLAB_MEXSRC_RELEASE) *)
 
-#endif (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
+{$ENDIF} (* defined(MX_COMPAT_32) || defined(MEX_DOUBLE_HANDLE) *)
 
 #if defined(TARGET_API_VERSION)
 #if MATLAB_TARGET_API_VERSION != TARGET_API_VERSION
 #error MATLAB_TARGET_API_VERSION != TARGET_API_VERSION
-#endif
-#else
+{$ENDIF}
+{$ELSE}
 #define TARGET_API_VERSION MATLAB_TARGET_API_VERSION
-#endif
+{$ENDIF}
 
-#endif (* __RELEASE_VERSION_DETECTOR__ *)
-#ifndef __MATRIX__VERSION_DEFS__
+{$ENDIF} (* __RELEASE_VERSION_DETECTOR__ *)
+{$IFNDEF __MATRIX__VERSION_DEFS__ }
 #define __MATRIX__VERSION_DEFS__
 
 #if defined(TARGET_API_VERSION)
@@ -184,10 +184,10 @@
 #error It is illegal to use MEX_DOUBLE_HANDLE with linear versioning
 #elif defined(MX_COMPAT_32) && TARGET_API_VERSION != 700
 #error It is illegal to use MX_COMPAT_32 with linear versioning
-#endif
-#endif
+{$ENDIF}
+{$ENDIF}
 
-#ifndef BUILDING_LIBMX
+{$IFNDEF BUILDING_LIBMX }
 
 #if !defined(TARGET_API_VERSION) || TARGET_API_VERSION == 700
 #if !defined(BUILDING_PUBLISHED_API_CPP)
@@ -198,326 +198,326 @@
 
 #if !defined(MX_COMPAT_32)
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//{$IFDEF __cplusplus }
+//extern "C" {
+//{$ENDIF}
 
-#ifndef mxSetProperty
+{$IFNDEF mxSetProperty }
 #define mxSetProperty mxSetProperty_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetProperty
+{$IFNDEF mxGetProperty }
 #define mxGetProperty mxGetProperty_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetField
+{$IFNDEF mxSetField }
 #define mxSetField mxSetField_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetFieldByNumber
+{$IFNDEF mxSetFieldByNumber }
 #define mxSetFieldByNumber mxSetFieldByNumber_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetFieldByNumber
+{$IFNDEF mxGetFieldByNumber }
 #define mxGetFieldByNumber mxGetFieldByNumber_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetField
+{$IFNDEF mxGetField }
 #define mxGetField mxGetField_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStructMatrix
+{$IFNDEF mxCreateStructMatrix }
 #define mxCreateStructMatrix mxCreateStructMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCellMatrix
+{$IFNDEF mxCreateCellMatrix }
 #define mxCreateCellMatrix mxCreateCellMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCharMatrixFromStrings
+{$IFNDEF mxCreateCharMatrixFromStrings }
 #define mxCreateCharMatrixFromStrings mxCreateCharMatrixFromStrings_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetString
+{$IFNDEF mxGetString }
 #define mxGetString mxGetString_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetNumberOfDimensions
+{$IFNDEF mxGetNumberOfDimensions }
 #define mxGetNumberOfDimensions mxGetNumberOfDimensions_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetDimensions
+{$IFNDEF mxGetDimensions }
 #define mxGetDimensions mxGetDimensions_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetDimensions
+{$IFNDEF mxSetDimensions }
 #define mxSetDimensions mxSetDimensions_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetIr
+{$IFNDEF mxSetIr }
 #define mxSetIr mxSetIr_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetIr
+{$IFNDEF mxGetIr }
 #define mxGetIr mxGetIr_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetJc
+{$IFNDEF mxSetJc }
 #define mxSetJc mxSetJc_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetJc
+{$IFNDEF mxGetJc }
 #define mxGetJc mxGetJc_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStructArray
+{$IFNDEF mxCreateStructArray }
 #define mxCreateStructArray mxCreateStructArray_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCharArray
+{$IFNDEF mxCreateCharArray }
 #define mxCreateCharArray mxCreateCharArray_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateNumericArray
+{$IFNDEF mxCreateNumericArray }
 #define mxCreateNumericArray mxCreateNumericArray_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCellArray
+{$IFNDEF mxCreateCellArray }
 #define mxCreateCellArray mxCreateCellArray_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateLogicalArray
+{$IFNDEF mxCreateLogicalArray }
 #define mxCreateLogicalArray mxCreateLogicalArray_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetCell
+{$IFNDEF mxGetCell }
 #define mxGetCell mxGetCell_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetCell
+{$IFNDEF mxSetCell }
 #define mxSetCell mxSetCell_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetNzmax
+{$IFNDEF mxSetNzmax }
 #define mxSetNzmax mxSetNzmax_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetN
+{$IFNDEF mxSetN }
 #define mxSetN mxSetN_730
-#endif
+{$ENDIF}
 
-#ifndef mxSetM
+{$IFNDEF mxSetM }
 #define mxSetM mxSetM_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetNzmax
+{$IFNDEF mxGetNzmax }
 #define mxGetNzmax mxGetNzmax_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateDoubleMatrix
+{$IFNDEF mxCreateDoubleMatrix }
 #define mxCreateDoubleMatrix mxCreateDoubleMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateNumericMatrix
+{$IFNDEF mxCreateNumericMatrix }
 #define mxCreateNumericMatrix mxCreateNumericMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateLogicalMatrix
+{$IFNDEF mxCreateLogicalMatrix }
 #define mxCreateLogicalMatrix mxCreateLogicalMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateSparse
+{$IFNDEF mxCreateSparse }
 #define mxCreateSparse mxCreateSparse_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateSparseLogicalMatrix
+{$IFNDEF mxCreateSparseLogicalMatrix }
 #define mxCreateSparseLogicalMatrix mxCreateSparseLogicalMatrix_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetNChars
+{$IFNDEF mxGetNChars }
 #define mxGetNChars mxGetNChars_730
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStringFromNChars
+{$IFNDEF mxCreateStringFromNChars }
 #define mxCreateStringFromNChars mxCreateStringFromNChars_730
-#endif
+{$ENDIF}
 
-#ifndef mxCalcSingleSubscript
+{$IFNDEF mxCalcSingleSubscript }
 #define mxCalcSingleSubscript mxCalcSingleSubscript_730
-#endif
+{$ENDIF}
 
-#ifndef mxGetDimensions_fcn
+{$IFNDEF mxGetDimensions_fcn }
 #define mxGetDimensions_fcn mxGetDimensions_730
-#endif
+{$ENDIF}
 
-#ifdef __cplusplus
-}
-#endif
+//{$IFDEF __cplusplus }
+//}
+//{$ENDIF}
 
-#else (* MX_COMPAT_32 *)
+{$ELSE} (* MX_COMPAT_32 *)
 
 (*
  * 32-bit compatibility APIs
  *)
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//{$IFDEF __cplusplus }
+//extern "C" {
+//{$ENDIF}
 
-#ifndef mxGetNumberOfDimensions
+{$IFNDEF mxGetNumberOfDimensions }
 #define mxGetNumberOfDimensions mxGetNumberOfDimensions_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetDimensions
+{$IFNDEF mxGetDimensions }
 #define mxGetDimensions mxGetDimensions_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetDimensions_fcn
+{$IFNDEF mxGetDimensions_fcn }
 #define mxGetDimensions_fcn mxGetDimensions_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetIr
+{$IFNDEF mxGetIr }
 #define mxGetIr mxGetIr_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetJc
+{$IFNDEF mxGetJc }
 #define mxGetJc mxGetJc_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetCell
+{$IFNDEF mxGetCell }
 #define mxGetCell mxGetCell_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetNzmax
+{$IFNDEF mxGetNzmax }
 #define mxGetNzmax mxGetNzmax_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetNzmax
+{$IFNDEF mxSetNzmax }
 #define mxSetNzmax mxSetNzmax_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetFieldByNumber
+{$IFNDEF mxGetFieldByNumber }
 #define mxGetFieldByNumber mxGetFieldByNumber_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetProperty
+{$IFNDEF mxSetProperty }
 #define mxSetProperty mxSetProperty_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetProperty
+{$IFNDEF mxGetProperty }
 #define mxGetProperty mxGetProperty_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetField
+{$IFNDEF mxSetField }
 #define mxSetField mxSetField_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetFieldByNumber
+{$IFNDEF mxSetFieldByNumber }
 #define mxSetFieldByNumber mxSetFieldByNumber_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetField
+{$IFNDEF mxGetField }
 #define mxGetField mxGetField_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStructMatrix
+{$IFNDEF mxCreateStructMatrix }
 #define mxCreateStructMatrix mxCreateStructMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCellMatrix
+{$IFNDEF mxCreateCellMatrix }
 #define mxCreateCellMatrix mxCreateCellMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCharMatrixFromStrings
+{$IFNDEF mxCreateCharMatrixFromStrings }
 #define mxCreateCharMatrixFromStrings mxCreateCharMatrixFromStrings_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetString
+{$IFNDEF mxGetString }
 #define mxGetString mxGetString_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetDimensions
+{$IFNDEF mxSetDimensions }
 #define mxSetDimensions mxSetDimensions_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetIr
+{$IFNDEF mxSetIr }
 #define mxSetIr mxSetIr_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetJc
+{$IFNDEF mxSetJc }
 #define mxSetJc mxSetJc_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStructArray
+{$IFNDEF mxCreateStructArray }
 #define mxCreateStructArray mxCreateStructArray_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCharArray
+{$IFNDEF mxCreateCharArray }
 #define mxCreateCharArray mxCreateCharArray_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateNumericArray
+{$IFNDEF mxCreateNumericArray }
 #define mxCreateNumericArray mxCreateNumericArray_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateCellArray
+{$IFNDEF mxCreateCellArray }
 #define mxCreateCellArray mxCreateCellArray_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateLogicalArray
+{$IFNDEF mxCreateLogicalArray }
 #define mxCreateLogicalArray mxCreateLogicalArray_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetCell
+{$IFNDEF mxSetCell }
 #define mxSetCell mxSetCell_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetN
+{$IFNDEF mxSetN }
 #define mxSetN mxSetN_700
-#endif
+{$ENDIF}
 
-#ifndef mxSetM
+{$IFNDEF mxSetM }
 #define mxSetM mxSetM_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateDoubleMatrix
+{$IFNDEF mxCreateDoubleMatrix }
 #define mxCreateDoubleMatrix mxCreateDoubleMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateNumericMatrix
+{$IFNDEF mxCreateNumericMatrix }
 #define mxCreateNumericMatrix mxCreateNumericMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateLogicalMatrix
+{$IFNDEF mxCreateLogicalMatrix }
 #define mxCreateLogicalMatrix mxCreateLogicalMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateSparse
+{$IFNDEF mxCreateSparse }
 #define mxCreateSparse mxCreateSparse_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateSparseLogicalMatrix
+{$IFNDEF mxCreateSparseLogicalMatrix }
 #define mxCreateSparseLogicalMatrix mxCreateSparseLogicalMatrix_700
-#endif
+{$ENDIF}
 
-#ifndef mxGetNChars
+{$IFNDEF mxGetNChars }
 #define mxGetNChars mxGetNChars_700
-#endif
+{$ENDIF}
 
-#ifndef mxCreateStringFromNChars
+{$IFNDEF mxCreateStringFromNChars }
 #define mxCreateStringFromNChars mxCreateStringFromNChars_700
-#endif
+{$ENDIF}
 
-#ifndef mxCalcSingleSubscript
+{$IFNDEF mxCalcSingleSubscript }
 #define mxCalcSingleSubscript mxCalcSingleSubscript_700
-#endif
+{$ENDIF}
 
-#ifdef __cplusplus
-}
-#endif
+//{$IFDEF __cplusplus }
+//}
+//{$ENDIF}
 
-#endif (* #ifdef MX_COMPAT_32 *)
-#endif (* !defined(BUILDING_PUBLISHED_API_CPP) *)
+{$ENDIF} (* {$IFDEF MX_COMPAT_32 } *)
+{$ENDIF} (* !defined(BUILDING_PUBLISHED_API_CPP) *)
 
 
 #elif TARGET_API_VERSION == 800
@@ -679,10 +679,10 @@ extern "C" {
 #define mxGetPropertyShared mxGetPropertySharedIsDeprecated
 #define mxSetPropertyShared mxSetPropertySharedIsDeprecated
 
-#endif (* TARGET_API_VERSION *)
-#endif (* BUILDING_LIBMX *)
-#endif (* __MATRIX__VERSION_DEFS__ *)
-#ifndef MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP
+{$ENDIF} (* TARGET_API_VERSION *)
+{$ENDIF} (* BUILDING_LIBMX *)
+{$ENDIF} (* __MATRIX__VERSION_DEFS__ *)
+{$IFNDEF MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP }
 #define MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP
 
 #include <stddef.h>
@@ -738,9 +738,9 @@ typedef enum {
     mxOBJECT_CLASS, (* keep the last real item in the list *)
 #if defined(_LP64) || defined(_WIN64)
     mxINDEX_CLASS = mxUINT64_CLASS,
-#else
+{$ELSE}
     mxINDEX_CLASS = mxUINT32_CLASS,
-#endif
+{$ENDIF}
     (* TEMPORARY AND NASTY HACK UNTIL mxSPARSE_CLASS IS COMPLETELY ELIMINATED *)
     mxSPARSE_CLASS = mxVOID_CLASS (* OBSOLETE! DO NOT USE *)
 } mxClassID;
@@ -764,7 +764,7 @@ typedef uint32_T mxUint32;
 typedef int64_T mxInt64;
 typedef uint64_T mxUint64;
 
-#endif (* MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP *)
+{$ENDIF} (* MATHWORKS_MATRIX_DETAIL_PUBLISHED_FWD_DECLS_HPP *)
 #if TARGET_API_VERSION >= 800
 (*
  * MATRIX numeric complex data types
@@ -780,7 +780,7 @@ typedef struct { mxUint32 real, imag; } mxComplexUint32;
 typedef struct { mxInt64 real, imag; } mxComplexInt64;
 typedef struct { mxUint64 real, imag; } mxComplexUint64;
 
-#endif (* TARGET_API_VERSION >= 800 *)
+{$ENDIF} (* TARGET_API_VERSION >= 800 *)
 #if TARGET_API_VERSION >= 800
 
 (*
@@ -806,7 +806,7 @@ MX_DECLARE_DATA_ACCESSORS(Uint64); (* mxUint64s*, mxComplexUint64s* in mx[SG]etU
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxMakeArrayReal(mxArray *);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxMakeArrayComplex(mxArray *);
 
-#endif (* TARGET_API_VERSION >= 800 *)
+{$ENDIF} (* TARGET_API_VERSION >= 800 *)
 
 (*
  * allocate memory, notifying registered listener
@@ -964,7 +964,7 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
 mxSetImagData(mxArray *pa,  (* pointer to array *)
               void *newdata (* imaginary data array pointer *)
               );
-#endif
+{$ENDIF}
 
 (*
  * Determine whether the given array contains complex data.
@@ -1056,7 +1056,7 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double *mxGetPi(const mxArray *pa (* pointer
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPi(mxArray *pa, (* pointer to array *)
                                                  double *pi   (* imaginary data array pointer *)
                                                  );
-#endif
+{$ENDIF}
 
 (*
  * Get string array data
@@ -1089,9 +1089,9 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C double mxGetScalar(const mxArray *pa);
  * Inform Watcom compilers that scalar double return values
  * will be in the FPU register.
  *)
-#ifdef __WATCOMC__
+{$IFDEF __WATCOMC__ }
 #pragma aux mxGetScalar value[8087];
-#endif
+{$ENDIF}
 
 (*
  * Is the isFromGlobalWorkspace bit set?
@@ -1478,18 +1478,18 @@ LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxUnreference(mxArray *pa);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C int mxUnshareArray(mxArray *pa, int level);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C mxArray *mxGetPropertyShared(const mxArray *pa, size_t i, const char *propname);
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void mxSetPropertyShared(mxArray *pa, size_t i, const char *propname, const mxArray *value);
-#endif
+{$ENDIF}
 (*
  * Inform Watcom compilers that scalar double return values
  * will be in the FPU register.
  *)
-#ifdef __WATCOMC__
+{$IFDEF __WATCOMC__ }
 #pragma aux mxGetEps value[8087];
 #pragma aux mxGetInf value[8087];
 #pragma aux mxGetNaN value[8087];
-#endif
+{$ENDIF}
 
-#ifndef mxassert_h
+{$IFNDEF mxassert_h }
 #define mxassert_h
 (*
 mxAssert(int expression, char *error_message)
@@ -1516,8 +1516,8 @@ mxAssert(int expression, char *error_message)
   purposes only.
 *)
 
-#ifdef MATLAB_MEX_FILE
-#ifndef NDEBUG
+{$IFDEF MATLAB_MEX_FILE }
+{$IFNDEF NDEBUG }
 
 LIBMMWMATRIX_PUBLISHED_API_EXTERN_C void
 mexPrintAssertion(const char *test, const char *fname, int linenum, const char *message);
@@ -1526,21 +1526,21 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
     ((test) ? (void)0 : mexPrintAssertion(#test, __FILE__, __LINE__, message))
 #define mxAssertS(test, message)                                                                   \
     ((test) ? (void)0 : mexPrintAssertion("", __FILE__, __LINE__, message))
-#else
+{$ELSE}
 #define mxAssert(test, message) ((void)0)
 #define mxAssertS(test, message) ((void)0)
-#endif
-#else
+{$ENDIF}
+{$ELSE}
 #include <assert.h>
 #define mxAssert(test, message) assert(test)
 #define mxAssertS(test, message) assert(test)
-#endif
+{$ENDIF}
 
-#endif (* mxassert_h *)
+{$ENDIF} (* mxassert_h *)
 
-#endif (* matrix_h *)
-#endif (* MATRIX_DEVELOPER_API_HPP *)
-#ifndef __MX_API_VER_HPP__
+{$ENDIF} (* matrix_h *)
+{$ENDIF} (* MATRIX_DEVELOPER_API_HPP *)
+{$IFNDEF __MX_API_VER_HPP__ }
 #define __MX_API_VER_HPP__
 
 (* Current MATRIX published API version *)
@@ -1557,12 +1557,12 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
 #if TARGET_API_VERSION == 700
 #if defined(MX_COMPAT_32)
 #define MX_TARGET_API_VER MX_LAST_32BIT_VER
-#else
+{$ELSE}
 #define MX_TARGET_API_VER MX_LAST_SEPARATE_COMPLEX_VER
-#endif
-#else
+{$ENDIF}
+{$ELSE}
 #define MX_TARGET_API_VER MX_CURRENT_API_VER
-#endif
+{$ENDIF}
 
 (*
  * The following macros enable conditional compilation based on the
@@ -1579,4 +1579,4 @@ mexPrintAssertion(const char *test, const char *fname, int linenum, const char *
 #define MX_HAS_64BIT_ARRAY_DIMS MX_TARGET_API_VER > MX_LAST_32BIT_VER
 #define MX_HAS_INTERLEAVED_COMPLEX MX_TARGET_API_VER > MX_LAST_SEPARATE_COMPLEX_VER
 
-#endif (* __MX_API_VER_HPP__ *)
+end. //######################################################################### ■
